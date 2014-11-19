@@ -1,0 +1,26 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+	<artifactId>org.kevoree.polynomial.root</artifactId>
+	<groupId>org.kevoree.polynomial</groupId>
+    <name>Kevoree :: Polynomial :: Root</name>
+    <version>2.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <kmf.version>3.5.4</kmf.version>
+    </properties>
+
+    <modules>
+		<module>PolynomialModel/org.kevoree.polynomial.impl</module>
+        <module>PolynomialModel/org.kevoree.polynomial.model</module>
+    </modules>
+
+    <build>
+        <plugins>
+         
+        </plugins>
+    </build>
+
+</project>
