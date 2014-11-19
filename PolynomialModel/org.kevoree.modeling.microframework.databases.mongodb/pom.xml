@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>org.kevoree.modeling.microframework.databases.mongodb</artifactId>
+    <name>Kevoree :: Modeling :: DataBases :: MongoDB</name>
+    <parent>
+         <artifactId>org.kevoree.polynomial.root</artifactId>
+        <groupId>org.kevoree.polynomial</groupId>
+        <version>2.0.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+
+    <properties>
+        <mongo.driver.version>2.13.0-rc0</mongo.driver.version>
+    </properties>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.kevoree.polynomial</groupId>
+            <artifactId>org.kevoree.polynomial.impl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>${mongo.driver.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>
