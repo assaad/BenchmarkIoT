@@ -1,7 +1,7 @@
 DataSets
 ===============
 
-In this directory, please find the various datasets used for our benchmark. These datasets numeroted from 1 to 10 reflect from best and worse case scenario for our approach. Each datasets is attached to a kind of sensors and is issue from an arduino based monitoring during one week.
+In this directory, please find the various datasets used for our benchmark. These datasets numeroted from 1 to 10 reflect from best to worst case scenario the usefulness of our approach. Each datasets is attached to a kind of sensors and is issued from an arduino based monitoring during many months.
 
 Many values of this experimental dataset are coming from the open source work which can be followed at this address: http://www.kayacik.ca/datasets/arduino/.
 
@@ -13,7 +13,7 @@ Electric sensor: SmartMeter
 
 ## Common format
 
-All datasets follow the same format. File are CSV file with one record per row. In the following forme:
+All datasets follow the same format. File are CSV file with one record per row. In the following format:
 
 TIMESTAMP,VALUE;
 
