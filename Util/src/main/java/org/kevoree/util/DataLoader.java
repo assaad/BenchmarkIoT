@@ -23,7 +23,7 @@ public class DataLoader {
 
 
     public static ArrayList<DataPoint> load(String filename, int column){
-        String csvFile = "D:\\workspace\\Github\\PolynomialModel\\BenchmarkIoT\\org.kevoree.polynomial.impl\\src\\main\\resources\\"+filename;
+        String csvFile = "D:\\workspace\\Github\\PolynomialModel\\DataSets\\"+filename;
 
         BufferedReader br = null;
         String line = "";

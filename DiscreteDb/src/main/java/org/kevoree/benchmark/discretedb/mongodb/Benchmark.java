@@ -30,6 +30,7 @@ public class Benchmark {
                 payloads[0][0]=String.valueOf(points.get(0).time);
                 payloads[0][1]=String.valueOf(points.get(0).value);
                 mdb.put(payloads);
+                System.out.println(i);
             }
         } catch (UnknownHostException e) {
             e.printStackTrace();

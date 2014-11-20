@@ -18,6 +18,7 @@ public class Benchmark {
 
 
             starttime = System.nanoTime();
+          //  ArrayList<DataPoint> points = DataLoader.load("noise.data",1);
             ArrayList<DataPoint> points = WaveLoader.load();
             endtime = System.nanoTime();
             res = ((double) (endtime - starttime)) / (1000000000);

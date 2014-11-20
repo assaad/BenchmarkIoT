@@ -13,7 +13,7 @@ public class WaveLoader {
         ArrayList<DataPoint> results = new ArrayList<DataPoint>();
 
         try {
-            inputAudio = com.ritolaaudio.simplewavio.Utils.WAVToFloats(new File("D:\\workspace\\Github\\PolynomialModel\\DataSets\\music.wav"));
+            inputAudio = com.ritolaaudio.simplewavio.Utils.WAVToFloats(new File("D:\\workspace\\Github\\PolynomialModel\\DataSets\\UncleBibby_-_06_-_Punch_It.wav"));
         } catch (IOException e) {
             e.printStackTrace();
         }
