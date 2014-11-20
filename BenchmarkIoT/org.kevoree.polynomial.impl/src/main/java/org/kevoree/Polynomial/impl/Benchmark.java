@@ -1,5 +1,11 @@
 package org.kevoree.Polynomial.impl;
 
+import org.kevoree.Polynomial.impl.Util.DataLoaderZip;
+import org.kevoree.Polynomial.impl.Util.DataPoint;
+import org.kevoree.Polynomial.impl.Util.WaveLoader;
+
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -14,14 +20,14 @@ public class Benchmark {
 
 
             starttime = System.nanoTime();
-            ArrayList<DataPoint> points = DataLoaderZip.load("ds1.zip");
+            ArrayList<DataPoint> points = WaveLoader.load();
             endtime = System.nanoTime();
             res = ((double) (endtime - starttime)) / (1000000000);
             System.out.println(" Loaded :" +points.size() + " values in " + res + " s!");
 
-           /* FileWriter outFile;
+           FileWriter outFile;
             try {
-                outFile = new FileWriter(i+".csv");
+                outFile = new FileWriter("ds9.csv");
                 PrintWriter out = new PrintWriter(outFile);
                 for (DataPoint dp: points) {
                     out.println(dp.time+","+dp.value);
@@ -30,7 +36,7 @@ public class Benchmark {
             }
             catch (Exception ex){
                 ex.printStackTrace();
-            }*/
+            }
 
 
 

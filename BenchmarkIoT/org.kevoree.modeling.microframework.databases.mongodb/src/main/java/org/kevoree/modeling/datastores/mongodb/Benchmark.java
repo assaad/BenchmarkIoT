@@ -1,7 +1,7 @@
 package org.kevoree.modeling.datastores.mongodb;
 
-import org.kevoree.Polynomial.impl.DataLoaderZip;
-import org.kevoree.Polynomial.impl.DataPoint;
+import org.kevoree.Polynomial.impl.Util.DataLoaderZip;
+import org.kevoree.Polynomial.impl.Util.DataPoint;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;

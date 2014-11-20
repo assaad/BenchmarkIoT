@@ -36,5 +36,5 @@ TIMESTAMP,VALUE;
 
 - DS7 (aka snd_sens_ord) : Weekly monitoring every second of the sound level of a room. Ordered on the natural temporal order.
 - DS8 (aka snd_sens_ran) : Weekly monitoring every second of the sound level of a room. Ordered on a chaotic temporal order.
-- DS9 (aka snd_music_ord) : 3 minutes music file converted into a set of sounds using a 44000 sampling rates. Inserted following the natural temportal order.
+- DS9 (aka snd_music_ord) : 3 minutes music file converted into a set of sounds using a 44000 sampling rates. Inserted following the natural temportal order. You can listen to the original music file "music.wav"
 - DS10 (aka snd_music_ran) : 3 minutes music file converted into a set of sounds using a 44000 sampling rates. Inserted following a chaotic temportal order.
