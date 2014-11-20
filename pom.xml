@@ -13,9 +13,9 @@
     </properties>
 
     <modules>
-		<module>PolynomialModel/org.kevoree.polynomial.impl</module>
-        <module>PolynomialModel/org.kevoree.polynomial.model</module>
-		 <module>PolynomialModel/org.kevoree.modeling.microframework.databases.mongodb</module>
+		<module>BenchmarkIoT/org.kevoree.polynomial.impl</module>
+        <module>BenchmarkIoT/org.kevoree.polynomial.model</module>
+		 <module>BenchmarkIoT/org.kevoree.modeling.microframework.databases.mongodb</module>
     </modules>
 
     <build>
