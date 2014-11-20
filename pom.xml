@@ -2,9 +2,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-	<artifactId>org.kevoree.polynomial.root</artifactId>
-	<groupId>org.kevoree.polynomial</groupId>
-    <name>Kevoree :: Polynomial :: Root</name>
+	<artifactId>org.kevoree.benchmarkiot.root</artifactId>
+	<groupId>org.kevoree.benchmarkiot</groupId>
+    <name>Kevoree :: BenchmarkIoT :: Root</name>
     <version>2.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -13,9 +13,8 @@
     </properties>
 
     <modules>
-		<module>BenchmarkIoT/org.kevoree.polynomial.impl</module>
-        <module>BenchmarkIoT/org.kevoree.polynomial.model</module>
-		 <module>BenchmarkIoT/org.kevoree.modeling.microframework.databases.mongodb</module>
+		<module>Util</module>
+		<module>DiscreteDb</module>
     </modules>
 
     <build>
