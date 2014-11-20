@@ -1,7 +1,5 @@
 package org.kevoree.Polynomial.impl;
 
-import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -15,13 +13,13 @@ public class Benchmark {
         double res;
 
 
-        for (int i=2; i<6;i++){
             starttime = System.nanoTime();
-            ArrayList<DataPoint> points = DataLoader.load("all.txt",i);
+            ArrayList<DataPoint> points = DataLoaderZip.load("ds1.zip");
             endtime = System.nanoTime();
             res = ((double) (endtime - starttime)) / (1000000000);
-            System.out.println(i+ " Loaded :" +points.size() + " values in " + res + " s!");
-            FileWriter outFile;
+            System.out.println(" Loaded :" +points.size() + " values in " + res + " s!");
+
+           /* FileWriter outFile;
             try {
                 outFile = new FileWriter(i+".csv");
                 PrintWriter out = new PrintWriter(outFile);
@@ -32,8 +30,8 @@ public class Benchmark {
             }
             catch (Exception ex){
                 ex.printStackTrace();
-            }
-        }
+            }*/
+
 
 
 

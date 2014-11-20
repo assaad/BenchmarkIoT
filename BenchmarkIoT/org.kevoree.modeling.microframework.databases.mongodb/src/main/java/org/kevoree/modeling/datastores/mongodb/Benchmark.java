@@ -1,6 +1,6 @@
 package org.kevoree.modeling.datastores.mongodb;
 
-import org.kevoree.Polynomial.impl.DataLoader;
+import org.kevoree.Polynomial.impl.DataLoaderZip;
 import org.kevoree.Polynomial.impl.DataPoint;
 
 import java.net.UnknownHostException;
@@ -16,7 +16,7 @@ public class Benchmark {
         double res;
 
         starttime = System.nanoTime();
-        ArrayList<DataPoint> points = DataLoader.load("oneweeksample.txt", 2);
+        ArrayList<DataPoint> points = DataLoaderZip.load("oneweeksample.txt", 2);
         endtime = System.nanoTime();
         res = ((double) (endtime - starttime)) / (1000000000);
         System.out.println("Loaded :" +points.size() + " values in " + res + " s!");
