@@ -1,5 +1,5 @@
-PolynomialModel
+Benchmark IoT sensor data Models
 ===============
 
-A polynomial model for sensor data, please download the full dataset from here:
+A Benchmark suite for sensor data models, data set sources from here:
 http://www.kayacik.ca/datasets/arduino/
