@@ -1,3 +1,3 @@
 class polynomial.sensor{
-   value : Double
+  @learn value : Double
 }

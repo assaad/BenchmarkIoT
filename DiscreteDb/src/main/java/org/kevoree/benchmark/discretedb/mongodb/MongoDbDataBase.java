@@ -37,17 +37,13 @@ public class MongoDbDataBase {
     }
 
 
-    public void put(String[][] payloads) {
+    public void put(String[] payloads) {
         DBCollection table = db.getCollection(KMF_COL);
-        List<DBObject> objs = new ArrayList<DBObject>();
-        for (int i = 0; i < payloads.length; i++) {
-            BasicDBObject obj = new BasicDBObject();
-            obj.put(KMF_KEY, payloads[i][0]);
-            obj.put(KMF_VAL, payloads[i][1]);
-            objs.add(obj);
+         BasicDBObject obj = new BasicDBObject();
+            obj.put(KMF_KEY, payloads[0]);
+            obj.put(KMF_VAL, payloads[1]);
 
-        }
-        table.aggregate(objs);
+       table.insert(obj);
     }
 
 

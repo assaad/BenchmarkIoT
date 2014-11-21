@@ -26,11 +26,11 @@ public class Benchmark {
         try {
             MongoDbDataBase mdb = new MongoDbDataBase("localhost" , 27017, "mydb");
             for(int i=0; i<points.size();i++){
-                String[][] payloads=new String[1][2];
-                payloads[0][0]=String.valueOf(points.get(0).time);
-                payloads[0][1]=String.valueOf(points.get(0).value);
+                String[] payloads=new String[2];
+                payloads[0]=String.valueOf(points.get(0).time);
+                payloads[1]=String.valueOf(points.get(0).value);
                 mdb.put(payloads);
-                System.out.println(i);
+             //   System.out.println(i);
             }
         } catch (UnknownHostException e) {
             e.printStackTrace();
