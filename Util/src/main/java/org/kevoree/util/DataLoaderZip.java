@@ -13,6 +13,13 @@ import java.util.zip.ZipInputStream;
  */
 public class DataLoaderZip {
 
+
+    private static String baseDir = "D:\\workspace\\Github\\PolynomialModel\\DataSets\\";
+
+    public static void setBaseDir(String baseDir) {
+        DataLoaderZip.baseDir = baseDir;
+    }
+
     public static Long getTimeStamp(int year, int month, int day, int hour, int min, int sec) {
         Calendar cal = Calendar.getInstance();
         cal.set(year, month - 1, day, hour, min, sec);
@@ -20,32 +27,20 @@ public class DataLoaderZip {
         Long timestamp = date.getTime() - date.getTime() % 1000;
         return timestamp;
     }
-
-
-
-
-    public static ArrayList<DataPoint> load(String filename){
-        String csvFile = "D:\\workspace\\Github\\PolynomialModel\\DataSets\\"+filename;
-
+    
+    public static ArrayList<DataPoint> load(String filename) {
+        String csvFile = baseDir + filename;
         String line = "";
         String cvsSplitBy = ",";
-
         ArrayList<DataPoint> results = new ArrayList<DataPoint>();
-
-        try
-        {
-
-
+        try {
             final ZipFile zf = new ZipFile(csvFile);
-
             final Enumeration<? extends ZipEntry> entries = zf.entries();
             ZipInputStream zipInput = null;
-
-            while (entries.hasMoreElements())
-            {
-                final ZipEntry zipEntry=entries.nextElement();
+            while (entries.hasMoreElements()) {
+                final ZipEntry zipEntry = entries.nextElement();
                 final String fileName = zipEntry.getName();
-                InputStream inputs=zf.getInputStream(zipEntry);
+                InputStream inputs = zf.getInputStream(zipEntry);
                 BufferedReader br = new BufferedReader(new InputStreamReader(inputs, "UTF-8"));
                 while ((line = br.readLine()) != null) {
                     String[] values = line.split(cvsSplitBy);
@@ -56,17 +51,9 @@ public class DataLoaderZip {
                 }
 
             }
-
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        catch(Exception e)
-        {
-           e.printStackTrace();
-        }
-
-
-
-
         return results;
     }
 }
