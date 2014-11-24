@@ -42,7 +42,7 @@ public class Benchmark {
         endtime = System.nanoTime();
         res = ((double) (endtime - starttime)) / (1000000000);
         System.out.println("Time to insert in a RBtree: " + res + " s!");
-        System.out.println(treetest2.size());
+        //System.out.println(treetest2.size());
 
 
         ArrayList<DataPoint> points2 = new ArrayList<DataPoint>();
@@ -63,7 +63,7 @@ public class Benchmark {
         endtime = System.nanoTime();
         res = ((double) (endtime - starttime)) / (1000000000);
         System.out.println("Time to insert in a treemap: " + res + " s!");
-        System.out.println(treetest.size());
+        //System.out.println(treetest.size());
 
 
 

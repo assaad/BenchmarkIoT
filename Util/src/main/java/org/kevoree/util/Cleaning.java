@@ -31,10 +31,13 @@ public class Cleaning {
                     test.put(points.get(j).time,points.get(j).value);
                     points2.add(points.get(j));
                 }
+                else {
+                    System.out.println("ERROR!!!!");
+                }
             }
             System.out.println("Final val of ds"+i+": " + points2.size());
 
-            FileWriter outFile;
+         /*   FileWriter outFile;
             try {
                 outFile = new FileWriter("ds"+(i)+".csv");
                 PrintWriter out = new PrintWriter(outFile);
@@ -44,7 +47,7 @@ public class Cleaning {
                 out.close();
             } catch (Exception ex) {
                 ex.printStackTrace();
-            }
+            }*/
         }
 
 
