@@ -7,8 +7,8 @@
     <version>2.0.0-SNAPSHOT</version>
 
     <parent>
-		<artifactId>org.kevoree.benchmarkiot.root</artifactId>
-		<groupId>org.kevoree.benchmarkiot</groupId>
+        <artifactId>org.kevoree.benchmarkiot.root</artifactId>
+        <groupId>org.kevoree.benchmarkiot</groupId>
         <version>2.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>

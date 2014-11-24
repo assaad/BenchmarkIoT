@@ -9,11 +9,13 @@
     <packaging>pom</packaging>
 
     <properties>
-        <kmf.version>3.5.4</kmf.version>
+        <kmf.version>4.0.1</kmf.version>
     </properties>
 
     <modules>
 		<module>Util</module>
+        <module>PolynomialDb/org.kevoree.polynomial.benchmark</module>
+        <module>PolynomialDb/org.kevoree.polynomial.model</module>
 		<module>DiscreteDb</module>
     </modules>
 
