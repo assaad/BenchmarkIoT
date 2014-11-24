@@ -33,13 +33,14 @@ public class Benchmark {
                 payloads[0]=String.valueOf(points.get(0).time);
                 payloads[1]=String.valueOf(points.get(0).value);
                 mdb.put(payloads);
-                if(i%500000==0) {
+                if(i%1000000==0) {
                     System.out.println(i);
                 }
             }
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
+        endtime = System.nanoTime();
         res = ((double) (endtime - starttime)) / (1000000000);
         System.out.println("Database inserted in: "+ res + " s!");
 
