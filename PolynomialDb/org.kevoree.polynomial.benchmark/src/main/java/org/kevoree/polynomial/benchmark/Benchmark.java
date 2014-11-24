@@ -33,30 +33,44 @@ public class Benchmark {
         System.out.println("Loaded :" +points.size() + " values in " + res + " s!");
 
 
-      /*  TreeMap<Long, Double> treetest = new TreeMap<Long, Double>();
+
+        RBTree treetest2 = new RBTree();
+        starttime = System.nanoTime();
+        for(int i=0;i<points.size();i++){
+            treetest2.insert(points.get(i).time, State.EXISTS);
+        }
+        endtime = System.nanoTime();
+        res = ((double) (endtime - starttime)) / (1000000000);
+        System.out.println("Time to insert in a RBtree: " + res + " s!");
+        System.out.println(treetest2.size());
 
 
+        ArrayList<DataPoint> points2 = new ArrayList<DataPoint>();
+        starttime = System.nanoTime();
+        for(int i=0;i<points.size();i++){
+            points2.add(new DataPoint(points.get(i).time,points.get(i).value));
+        }
+        endtime = System.nanoTime();
+        res = ((double) (endtime - starttime)) / (1000000000);
+        System.out.println("Time to insert in a Arraylist: " + res + " s!");
+
+
+        TreeMap<Long, Double> treetest = new TreeMap<Long, Double>();
         starttime = System.nanoTime();
         for(int i=0;i<points.size();i++){
             treetest.put(points.get(i).time,points.get(i).value);
         }
         endtime = System.nanoTime();
         res = ((double) (endtime - starttime)) / (1000000000);
-        System.out.println("Time to insert in a tree: " + res + " s!");*/
-
-
-       /*RBTree treetest = new RBTree();
-        starttime = System.nanoTime();
-        for(int i=0;i<points.size();i++){
-            treetest.insert(points.get(i).time, State.EXISTS);
-        }
-        endtime = System.nanoTime();
-        res = ((double) (endtime - starttime)) / (1000000000);
-        System.out.println("Time to insert in a tree: " + res + " s!");*/
+        System.out.println("Time to insert in a treemap: " + res + " s!");
+        System.out.println(treetest.size());
 
 
 
 
+
+
+/*
         final long starttime2 = System.nanoTime();
         final IotBenchmarkUniverse universe = new IotBenchmarkUniverse();
         universe.newDimension(new Callback<IotBenchmarkDimension>() {
@@ -103,7 +117,7 @@ public class Benchmark {
                 System.out.println("Elements inserted: "+sensor.timeTree().size());
             }
         });
-
+*/
 
     }
 }

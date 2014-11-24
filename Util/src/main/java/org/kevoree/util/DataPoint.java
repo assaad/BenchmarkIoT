@@ -6,4 +6,13 @@ package org.kevoree.util;
 public class DataPoint {
     public long time;
     public double value;
+
+    public DataPoint(){
+
+    }
+    public DataPoint(long time, double value) {
+        this.time=time;
+        this.value=value;
+
+    }
 }
