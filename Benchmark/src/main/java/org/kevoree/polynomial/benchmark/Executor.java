@@ -12,11 +12,12 @@ import java.util.ArrayList;
 public class Executor {
     public static void main(String[] args) throws IOException {
 
-        Benchmark[] toRun = new Benchmark[3];
+        Benchmark[] toRun = new Benchmark[4];
 
         toRun[0] = new BenchmarkArrayList();
         toRun[1] = new BenchmarkRbTree();
         toRun[2] = new BenchmarkTreeMap();
+        toRun[3] = new BenchmarkPolynomialTreeMap();
 
         long starttime;
         long endtime;
