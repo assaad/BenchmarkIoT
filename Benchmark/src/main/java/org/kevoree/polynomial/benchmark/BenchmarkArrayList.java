@@ -21,6 +21,7 @@ public class BenchmarkArrayList extends Benchmark {
 
         for (int j = 0; j < iterations; j++) {
             ArrayList<DataPoint> points2 = new ArrayList<DataPoint>();
+            System.gc();
             starttime = System.nanoTime();
             for (int i = 0; i < points.size(); i++) {
                 points2.add(new DataPoint(points.get(i).time, points.get(i).value));
@@ -29,7 +30,6 @@ public class BenchmarkArrayList extends Benchmark {
             res = ((double) (endtime - starttime)) / (1000000000);
             avg += res;
             points2.clear();
-            System.gc();
         }
         avg = avg / iterations;
         return avg;
@@ -52,6 +52,7 @@ public class BenchmarkArrayList extends Benchmark {
         }
 
         for (int j = 0; j < iterations; j++) {
+            System.gc();
             starttime = System.nanoTime();
             for (int i = 0; i < value; i++) {
                 points2.get(points2.indexOf(points2.get(rand.nextInt(points2.size()))));
@@ -59,7 +60,7 @@ public class BenchmarkArrayList extends Benchmark {
             endtime = System.nanoTime();
             res = ((double) (endtime - starttime)) / (1000000000);
             avg += res;
-            System.gc();
+
         }
         avg = avg / iterations;
         return avg;
@@ -82,6 +83,7 @@ public class BenchmarkArrayList extends Benchmark {
         }
 
         for (int j = 0; j < iterations; j++) {
+            System.gc();
             starttime = System.nanoTime();
             for (int i = 0; i < value; i++) {
                 points2.get(points2.indexOf(points2.get(i))); //tochange
@@ -89,7 +91,7 @@ public class BenchmarkArrayList extends Benchmark {
             endtime = System.nanoTime();
             res = ((double) (endtime - starttime)) / (1000000000);
             avg += res;
-            System.gc();
+
         }
         avg = avg / iterations;
         return avg;
