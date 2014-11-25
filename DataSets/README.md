@@ -17,6 +17,10 @@ All datasets follow the same format. File are CSV file with one record per row. 
 
 TIMESTAMP,VALUE;
 
+### Constant dataset
+
+- DS0 (aka const_db) : 12,000,000 values of timestamps and a constant = 24.0.
+
 ### Temperature sensor(value = celcius degree)
 
 - DS1 (aka temp_ord) : Weekly monitoring every second of the tempoerature of a room. Ordered on the natural temporal order.

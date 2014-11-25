@@ -25,7 +25,7 @@ public class Executor {
         starttime = System.nanoTime();
         //DataLoaderZip.setBaseDir("/Users/duke/Documents/dev/assaad/BenchmarkIoT/DataSets/");
         DataLoaderZip.setBaseDir("D:\\workspace\\Github\\PolynomialModel\\DataSets\\");
-        final ArrayList<DataPoint> points = DataLoaderZip.load("ds1.zip");
+        final ArrayList<DataPoint> points = DataLoaderZip.load("ds0.zip");
         endtime = System.nanoTime();
         res = ((double) (endtime - starttime)) / (1000000000);
         System.out.println("Loaded :" + points.size() + " values in " + res + " s!");
