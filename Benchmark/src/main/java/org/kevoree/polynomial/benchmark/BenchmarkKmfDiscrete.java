@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class BenchmarkKmfDiscrete extends Benchmark {
     @Override
-    public double benchmarkWrite(int number) {
+    public double benchmarkWrite(int iterations) {
         /* Old Code was
         final long starttime2 = System.nanoTime();
         final IotBenchmarkUniverse universe = new IotBenchmarkUniverse();
@@ -70,10 +70,10 @@ public class BenchmarkKmfDiscrete extends Benchmark {
         double res;
 
         double avg = 0;
-        if (number <= 0)
+        if (iterations <= 0)
             return 0;
 
-        for (int j = 0; j < number; j++) {
+        for (int j = 0; j < iterations; j++) {
             ArrayList<DataPoint> points2 = new ArrayList<DataPoint>();
             starttime = System.nanoTime();
             for (int i = 0; i < points.size(); i++) {
@@ -85,14 +85,20 @@ public class BenchmarkKmfDiscrete extends Benchmark {
             points2.clear();
             System.gc();
         }
-        avg = avg / number;
+        avg = avg / iterations;
         return avg;
     }
 
     @Override
-    public double benchmarkRead(int number) {
+    public double benchmarkRandomRead(int iteration, int values) {
         return 0;
     }
+
+    @Override
+    public double benchmarkSequencialRead(int iteration, int values) {
+        return 0;
+    }
+
 
     @Override
     public String getBenchmarkName() {

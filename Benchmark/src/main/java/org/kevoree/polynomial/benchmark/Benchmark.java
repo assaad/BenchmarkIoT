@@ -18,9 +18,11 @@ public abstract class Benchmark {
         this.points = points;
     }
 
-    public abstract double benchmarkWrite(int number);
+    public abstract double benchmarkWrite(int iterations);
 
-    public abstract double benchmarkRead(int number);
+    public abstract double benchmarkRandomRead(int iterations, int values);
+
+    public abstract double benchmarkSequencialRead(int iterations, int values);
 
     public abstract String getBenchmarkName();
 

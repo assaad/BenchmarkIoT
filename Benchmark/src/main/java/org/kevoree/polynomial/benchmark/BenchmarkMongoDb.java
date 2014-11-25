@@ -9,19 +9,19 @@ import org.kevoree.util.dbdrivers.MongoDbDataBase;
  */
 public class BenchmarkMongoDb extends Benchmark {
     @Override
-    public double benchmarkWrite(int number) {
+    public double benchmarkWrite(int iterations) {
         long starttime;
         long endtime;
         double res;
 
         double avg = 0;
-        if (number <= 0)
+        if (iterations <= 0)
             return 0;
 
         try {
             MongoDbDataBase mdb = new MongoDbDataBase("localhost", 27017, "mydb");
 
-            for (int j = 0; j < number; j++) {
+            for (int j = 0; j < iterations; j++) {
                 mdb.clean();
                 starttime = System.nanoTime();
                 for (int i = 0; i < points.size(); i++) {
@@ -38,7 +38,7 @@ public class BenchmarkMongoDb extends Benchmark {
                 avg += res;
                 System.gc();
             }
-            avg = avg / number;
+            avg = avg / iterations;
             return avg;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -47,9 +47,15 @@ public class BenchmarkMongoDb extends Benchmark {
     }
 
     @Override
-    public double benchmarkRead(int number) {
+    public double benchmarkRandomRead(int iterations, int values) {
         return 0;
     }
+
+    @Override
+    public double benchmarkSequencialRead(int iterations, int values) {
+        return 0;
+    }
+
 
     @Override
     public String getBenchmarkName() {

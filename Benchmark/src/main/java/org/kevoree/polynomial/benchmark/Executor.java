@@ -40,7 +40,7 @@ public class Executor {
 
         for (int i = 0; i < toRun.length; i++) {
             toRun[i].setDataPoints(points);
-            System.out.println("Reading on " + toRun[i].getBenchmarkName() + ": " + toRun[i].benchmarkRead(10)+" s");
+            System.out.println("Reading on " + toRun[i].getBenchmarkName() + ": " + toRun[i].benchmarkRandomRead(10)+" s");
         }
 
 

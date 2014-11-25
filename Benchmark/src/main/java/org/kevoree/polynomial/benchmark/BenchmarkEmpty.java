@@ -9,16 +9,16 @@ import java.util.ArrayList;
  */
 public class BenchmarkEmpty extends Benchmark {
     @Override
-    public double benchmarkWrite(int number) {
+    public double benchmarkWrite(int iterations) {
         long starttime;
         long endtime;
         double res;
 
         double avg = 0;
-        if (number <= 0)
+        if (iterations <= 0)
             return 0;
 
-        for (int j = 0; j < number; j++) {
+        for (int j = 0; j < iterations; j++) {
             starttime = System.nanoTime();
             for (int i = 0; i < points.size(); i++) {
             }
@@ -27,30 +27,53 @@ public class BenchmarkEmpty extends Benchmark {
             avg += res;
             System.gc();
         }
-        avg = avg / number;
+        avg = avg / iterations;
         return avg;
     }
 
     @Override
-    public double benchmarkRead(int number) {
+    public double benchmarkRandomRead(int iterations, int values) {
         long starttime;
         long endtime;
         double res;
 
         double avg = 0;
-        if (number <= 0)
+        if (iterations <= 0)
             return 0;
 
-        for (int j = 0; j < number; j++) {
+        for (int j = 0; j < iterations; j++) {
             starttime = System.nanoTime();
-            for (int i = 0; i < points.size(); i++) {
+            for (int i = 0; i < values; i++) {
             }
             endtime = System.nanoTime();
             res = ((double) (endtime - starttime)) / (1000000000);
             avg += res;
             System.gc();
         }
-        avg = avg / number;
+        avg = avg / iterations;
+        return avg;
+    }
+
+    @Override
+    public double benchmarkSequencialRead(int iterations, int values) {
+        long starttime;
+        long endtime;
+        double res;
+
+        double avg = 0;
+        if (iterations <= 0)
+            return 0;
+
+        for (int j = 0; j < iterations; j++) {
+            starttime = System.nanoTime();
+            for (int i = 0; i < values; i++) {
+            }
+            endtime = System.nanoTime();
+            res = ((double) (endtime - starttime)) / (1000000000);
+            avg += res;
+            System.gc();
+        }
+        avg = avg / iterations;
         return avg;
     }
 
