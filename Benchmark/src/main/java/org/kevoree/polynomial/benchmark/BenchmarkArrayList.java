@@ -36,7 +36,32 @@ public class BenchmarkArrayList extends Benchmark {
 
     @Override
     public double benchmarkRead(int number) {
-        return 0;
+        long starttime;
+        long endtime;
+        double res;
+
+        double avg = 0;
+        if (number <= 0)
+            return 0;
+
+        ArrayList<DataPoint> points2 = new ArrayList<DataPoint>();
+        for (int i = 0; i < points.size(); i++) {
+            points2.add(new DataPoint(points.get(i).time, points.get(i).value));
+        }
+
+        for (int j = 0; j < number; j++) {
+            starttime = System.nanoTime();
+            for (int i = 0; i < points.size(); i++) {
+                points2.get(points2.indexOf(points.get(i)));
+            }
+            endtime = System.nanoTime();
+            res = ((double) (endtime - starttime)) / (1000000000);
+            avg += res;
+            System.gc();
+        }
+        avg = avg / number;
+        return avg;
+
     }
 
     @Override

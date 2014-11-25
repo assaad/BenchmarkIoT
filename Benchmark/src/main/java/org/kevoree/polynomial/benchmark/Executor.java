@@ -12,12 +12,13 @@ import java.util.ArrayList;
 public class Executor {
     public static void main(String[] args) throws IOException {
 
-        Benchmark[] toRun = new Benchmark[4];
+        Benchmark[] toRun = new Benchmark[5];
 
-        toRun[0] = new BenchmarkArrayList();
-        toRun[1] = new BenchmarkRbTree();
-        toRun[2] = new BenchmarkTreeMap();
-        toRun[3] = new BenchmarkPolynomialTreeMap();
+        toRun[0] = new BenchmarkEmpty();
+        toRun[1] = new BenchmarkArrayList();
+        toRun[2] = new BenchmarkRbTree();
+        toRun[3] = new BenchmarkTreeMap();
+        toRun[4] = new BenchmarkPolynomialTreeMap();
 
         long starttime;
         long endtime;
@@ -32,7 +33,14 @@ public class Executor {
 
         for (int i = 0; i < toRun.length; i++) {
             toRun[i].setDataPoints(points);
-            System.out.println("Writing on " + toRun[i].getBenchmarkName() + ": " + toRun[i].benchmarkWrite(10));
+            System.out.println("Writing on " + toRun[i].getBenchmarkName() + ": " + toRun[i].benchmarkWrite(10)+" s");
+        }
+
+        System.out.println("-----------------------------------------------");
+
+        for (int i = 0; i < toRun.length; i++) {
+            toRun[i].setDataPoints(points);
+            System.out.println("Reading on " + toRun[i].getBenchmarkName() + ": " + toRun[i].benchmarkRead(10)+" s");
         }
 
 

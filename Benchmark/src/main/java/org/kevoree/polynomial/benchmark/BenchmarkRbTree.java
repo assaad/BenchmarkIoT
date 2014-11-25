@@ -36,7 +36,33 @@ public class BenchmarkRbTree extends Benchmark {
 
     @Override
     public double benchmarkRead(int number) {
-        return 0;
+
+        long starttime;
+        long endtime;
+        double res;
+
+        double avg = 0;
+        if (number <= 0)
+            return 0;
+        RBTree treetest = new RBTree();
+        for (int i = 0; i < points.size(); i++) {
+            treetest.insert(points.get(i).time, State.EXISTS);
+        }
+
+        for (int j = 0; j < number; j++) {
+
+            starttime = System.nanoTime();
+            for (int i = 0; i < points.size(); i++) {
+                treetest.lookup(points.get(i).time);
+            }
+            endtime = System.nanoTime();
+            res = ((double) (endtime - starttime)) / (1000000000);
+            avg += res;
+            System.gc();
+        }
+        avg = avg / number;
+        return avg;
+
     }
 
     @Override
