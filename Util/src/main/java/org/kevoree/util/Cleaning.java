@@ -1,9 +1,6 @@
 package org.kevoree.util;
 
-import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.DoubleSummaryStatistics;
 import java.util.TreeMap;
 
 /**

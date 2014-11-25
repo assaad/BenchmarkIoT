@@ -17,9 +17,9 @@
  ******************************************************************************/
 package com.ritolaaudio.simplewavio.files.riff;
 
-import java.nio.ByteBuffer;
-
 import com.ritolaaudio.simplewavio.files.RiffChunk;
+
+import java.nio.ByteBuffer;
 
 /**
  * Whatcha gonna do with all that JUNK, all that JUNK inside your chunk?<br>

@@ -19,11 +19,7 @@ package com.ritolaaudio.simplewavio.files;
 
 import java.nio.BufferOverflowException;
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * General form of a RIFF chunk, the standard block of data contained within a RIFF file.<br>
@@ -51,8 +47,7 @@ public abstract class RiffChunk implements Comparable<RiffChunk>
 	protected static byte [] workChunk2 = new byte[2];
 	
 	protected HashMap<Class,RiffChunk> childMap = new HashMap<Class,RiffChunk>();
-	public RiffChunk getChildChunk(Class c){System.out.println(this.getClass().getName()+".getChildChunk("+c.getName()+") returned "+childMap.get(c).getClass().getName());return childMap.get(c);}
-	
+
 	/**
 	 * Parse the given buffer and output all contained RIFF chunks, which may themselves contain RIFF chunks.
 	 * @param fileBuffer	The buffer containing the raw RIFF file bytes
@@ -66,14 +61,14 @@ public abstract class RiffChunk implements Comparable<RiffChunk>
 		String parentClassSimpleName=parentClass.getSimpleName();
 		String parentTag=parentClassSimpleName.substring(parentClassSimpleName.length()-4);
 		String parentTagSeparator=".";
-		
+
 		//The exception: If this is the root of the file.
 		if(parentClass==RiffRoot.class)
 			{
 			parentTag="";
 			parentTagSeparator="";
 			}
-		
+
 		//System.out.println("Parent tag: "+parentTag);
 		//System.out.println("package: "+packageName);
 		LinkedList<RiffChunk>subChunks = new LinkedList<RiffChunk>();
@@ -110,18 +105,6 @@ public abstract class RiffChunk implements Comparable<RiffChunk>
 		return subChunks;
 		}//end RiffChunk
 	
-	/**
-	 * Parse the given buffer (minding its position) and build this RIFF chunk and field its child chunk hierarchy.<br>
-	 * @param fileBuffer	The buffer containing the raw RIFF data.
-	 * @since Jul 15, 2012
-	 */
-	protected final void parseRiff(ByteBuffer fileBuffer)
-		{
-		List<RiffChunk> children = ParseRiff(fileBuffer,this.getClass());
-		for(RiffChunk c:children)
-			{childMap.put(c.getClass(), c);}
-		}
-	
 	public static long readUnsignedInt(ByteBuffer fileBuffer)
 		{
 		fileBuffer.get(workChunk4);
@@ -141,6 +124,21 @@ public abstract class RiffChunk implements Comparable<RiffChunk>
 			{result|=((int)(workChunk2[i]&0xFF))<<i*8;}
 		return result;
 		}
+	
+	public RiffChunk getChildChunk(Class c){System.out.println(this.getClass().getName()+".getChildChunk("+c.getName()+") returned "+childMap.get(c).getClass().getName());return childMap.get(c);}
+	
+	/**
+	 * Parse the given buffer (minding its position) and build this RIFF chunk and field its child chunk hierarchy.<br>
+	 * @param fileBuffer	The buffer containing the raw RIFF data.
+	 * @since Jul 15, 2012
+	 */
+	protected final void parseRiff(ByteBuffer fileBuffer)
+		{
+		List<RiffChunk> children = ParseRiff(fileBuffer,this.getClass());
+		for(RiffChunk c:children)
+			{childMap.put(c.getClass(), c);}
+		}
+
 	/**
 	 * Used for ensuring proper tag order when writing RIFF files because some utilities expect a specific tag order. (lower is earlier)
 	 */

@@ -9,14 +9,14 @@
     <packaging>pom</packaging>
 
     <properties>
+        <mongo.driver.version>2.13.0-rc0</mongo.driver.version>
         <kmf.version>4.0.2-SNAPSHOT</kmf.version>
     </properties>
 
     <modules>
 		<module>Util</module>
-        <module>PolynomialDb/org.kevoree.polynomial.benchmark</module>
-        <module>PolynomialDb/org.kevoree.polynomial.model</module>
-		<module>DiscreteDb</module>
+        <module>Benchmark</module>
+        <module>model</module>
     </modules>
 
     <build>

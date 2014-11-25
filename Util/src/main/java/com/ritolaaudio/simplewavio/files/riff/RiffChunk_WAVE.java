@@ -17,12 +17,12 @@
  ******************************************************************************/
 package com.ritolaaudio.simplewavio.files.riff;
 
-import java.nio.ByteBuffer;
-
 import com.ritolaaudio.simplewavio.Utils;
 import com.ritolaaudio.simplewavio.files.RiffChunk;
 import com.ritolaaudio.simplewavio.files.riff.wave.RiffChunk_data;
 import com.ritolaaudio.simplewavio.files.riff.wave.RiffChunk_fmt_;
+
+import java.nio.ByteBuffer;
 
 public class RiffChunk_WAVE extends RiffChunk
 	{

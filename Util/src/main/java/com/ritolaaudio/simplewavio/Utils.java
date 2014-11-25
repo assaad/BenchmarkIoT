@@ -16,23 +16,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 package com.ritolaaudio.simplewavio;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PipedInputStream;
-import java.io.PipedOutputStream;
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.channels.FileChannel;
-
-import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.UnsupportedAudioFileException;
 
 import com.ritolaaudio.simplewavio.files.RiffChunk;
 import com.ritolaaudio.simplewavio.files.RiffChunk_RIFF;
@@ -40,6 +23,13 @@ import com.ritolaaudio.simplewavio.files.RiffRoot;
 import com.ritolaaudio.simplewavio.files.riff.RiffChunk_WAVE;
 import com.ritolaaudio.simplewavio.files.riff.wave.RiffChunk_data;
 import com.ritolaaudio.simplewavio.files.riff.wave.RiffChunk_fmt_;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.channels.FileChannel;
 
 /**
  * General utilities for reading and writing WAV (RIFF) files.

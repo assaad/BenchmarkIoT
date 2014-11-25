@@ -1,10 +1,9 @@
-package org.kevoree.benchmark.discretedb.mongodb;
+package org.kevoree.util.dbdrivers;
 
 import com.mongodb.*;
 
 import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class MongoDbDataBase {
 

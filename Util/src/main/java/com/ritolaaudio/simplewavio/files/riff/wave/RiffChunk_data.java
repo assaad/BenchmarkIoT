@@ -16,10 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 package com.ritolaaudio.simplewavio.files.riff.wave;
-import java.nio.BufferOverflowException;
-import java.nio.ByteBuffer;
 
 import com.ritolaaudio.simplewavio.files.RiffChunk;
+
+import java.nio.BufferOverflowException;
+import java.nio.ByteBuffer;
 
 public class RiffChunk_data extends RiffChunk
 	{
