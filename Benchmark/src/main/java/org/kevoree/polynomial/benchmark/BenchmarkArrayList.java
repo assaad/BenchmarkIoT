@@ -52,7 +52,7 @@ public class BenchmarkArrayList extends Benchmark {
         for (int j = 0; j < number; j++) {
             starttime = System.nanoTime();
             for (int i = 0; i < points.size(); i++) {
-                points2.get(points2.indexOf(points.get(i)));
+                points2.get(points2.indexOf(points2.get(i)));
             }
             endtime = System.nanoTime();
             res = ((double) (endtime - starttime)) / (1000000000);
