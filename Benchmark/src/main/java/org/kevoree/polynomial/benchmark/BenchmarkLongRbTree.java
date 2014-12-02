@@ -100,6 +100,6 @@ public class BenchmarkLongRbTree extends Benchmark {
 
     @Override
     public String getBenchmarkName() {
-        return "Rb Tree";
+        return "Long Rb Tree";
     }
 }
