@@ -22,11 +22,11 @@
             <version>${kmf.version}</version>
         </dependency>
         
-        <dependency>
+        <!--dependency>
             <groupId>org.kevoree.modeling</groupId>
             <artifactId>org.kevoree.modeling.microframework.databases.leveldb</artifactId>
             <version>${kmf.version}</version>
-        </dependency>
+        </dependency-->
         <dependency>
             <groupId>org.kevoree.benchmarkiot</groupId>
             <artifactId>org.kevoree.polynomial.model</artifactId>
