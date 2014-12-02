@@ -21,7 +21,9 @@ public class BenchmarkPolynomialTreeMap extends Benchmark {
 
         for (int j = 0; j < iterations; j++) {
             PolynomialModel pm = new PolynomialModel(1000,1,20);
-            System.gc();
+            if(gcCollect) {
+                System.gc();
+            }
             starttime = System.nanoTime();
             for (int i = 0; i < points.size(); i++) {
                 pm.feed(points.get(i).time, points.get(i).value);
@@ -55,7 +57,9 @@ public class BenchmarkPolynomialTreeMap extends Benchmark {
 
         for (int j = 0; j < iterations; j++) {
 
-            System.gc();
+            if(gcCollect) {
+                System.gc();
+            }
             starttime = System.nanoTime();
             for (int i = 0; i < value; i++) {
                 pm.fastReconstruct(points.get(random.nextInt(points.size())).time);
@@ -87,6 +91,9 @@ public class BenchmarkPolynomialTreeMap extends Benchmark {
         pm.finalSave();
 
         for (int j = 0; j < iterations; j++) {
+            if(gcCollect) {
+                System.gc();
+            }
 
             starttime = System.nanoTime();
             for (int i = 0; i < value; i++) {
@@ -96,7 +103,6 @@ public class BenchmarkPolynomialTreeMap extends Benchmark {
             endtime = System.nanoTime();
             res = ((double) (endtime - starttime)) / (1000000000);
             avg += res;
-            System.gc();
         }
         avg = avg / iterations;
         return avg;

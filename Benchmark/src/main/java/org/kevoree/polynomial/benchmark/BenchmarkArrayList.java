@@ -21,7 +21,9 @@ public class BenchmarkArrayList extends Benchmark {
 
         for (int j = 0; j < iterations; j++) {
             ArrayList<DataPoint> points2 = new ArrayList<DataPoint>();
-            System.gc();
+            if(gcCollect) {
+                System.gc();
+            }
             starttime = System.nanoTime();
             for (int i = 0; i < points.size(); i++) {
                 points2.add(new DataPoint(points.get(i).time, points.get(i).value));
@@ -52,7 +54,9 @@ public class BenchmarkArrayList extends Benchmark {
         }
 
         for (int j = 0; j < iterations; j++) {
-            System.gc();
+            if(gcCollect) {
+                System.gc();
+            }
             starttime = System.nanoTime();
             for (int i = 0; i < value; i++) {
                 points2.get(points2.indexOf(points2.get(rand.nextInt(points2.size()))));
@@ -83,7 +87,9 @@ public class BenchmarkArrayList extends Benchmark {
         }
 
         for (int j = 0; j < iterations; j++) {
-            System.gc();
+            if(gcCollect) {
+                System.gc();
+            }
             starttime = System.nanoTime();
             for (int i = 0; i < value; i++) {
                 points2.get(points2.indexOf(points2.get(i))); //tochange

@@ -22,6 +22,9 @@ public class BenchmarkMongoDb extends Benchmark {
             MongoDbDataBase mdb = new MongoDbDataBase("localhost", 27017, "mydb");
 
             for (int j = 0; j < iterations; j++) {
+                if(gcCollect) {
+                    System.gc();
+                }
                 mdb.clean();
                 starttime = System.nanoTime();
                 for (int i = 0; i < points.size(); i++) {
@@ -36,7 +39,6 @@ public class BenchmarkMongoDb extends Benchmark {
                 endtime = System.nanoTime();
                 res = ((double) (endtime - starttime)) / (1000000000);
                 avg += res;
-                System.gc();
             }
             avg = avg / iterations;
             return avg;

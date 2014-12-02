@@ -39,6 +39,7 @@ public class Executor {
         System.out.println("-----------------------------------------------");
 
         for (int i = 0; i < toRun.length; i++) {
+            toRun[i].setGcCollect(true);
             toRun[i].setDataPoints(points);
             System.out.println("Random reading on " + toRun[i].getBenchmarkName() + ": " + toRun[i].benchmarkRandomRead(10,100000)+" s");
         }

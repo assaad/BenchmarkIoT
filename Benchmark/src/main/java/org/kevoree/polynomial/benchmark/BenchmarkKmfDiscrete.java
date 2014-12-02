@@ -74,6 +74,9 @@ public class BenchmarkKmfDiscrete extends Benchmark {
             return 0;
 
         for (int j = 0; j < iterations; j++) {
+            if(gcCollect) {
+                System.gc();
+            }
             ArrayList<DataPoint> points2 = new ArrayList<DataPoint>();
             starttime = System.nanoTime();
             for (int i = 0; i < points.size(); i++) {
@@ -83,7 +86,6 @@ public class BenchmarkKmfDiscrete extends Benchmark {
             res = ((double) (endtime - starttime)) / (1000000000);
             avg += res;
             points2.clear();
-            System.gc();
         }
         avg = avg / iterations;
         return avg;

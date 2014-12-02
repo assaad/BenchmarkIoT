@@ -21,7 +21,9 @@ public class BenchmarkRbTree extends Benchmark {
             return 0;
 
         for (int j = 0; j < number; j++) {
-            System.gc();
+            if(gcCollect) {
+                System.gc();
+            }
             RBTree treetest = new RBTree();
             starttime = System.nanoTime();
             for (int i = 0; i < points.size(); i++) {
@@ -54,7 +56,9 @@ public class BenchmarkRbTree extends Benchmark {
         }
 
         for (int j = 0; j < iterations; j++) {
-            System.gc();
+            if(gcCollect) {
+                System.gc();
+            }
             starttime = System.nanoTime();
             for (int i = 0; i < value; i++) {
                 treetest.lookup(points.get(random.nextInt(points.size())).time);
@@ -84,7 +88,9 @@ public class BenchmarkRbTree extends Benchmark {
         }
 
         for (int j = 0; j < iterations; j++) {
-
+            if(gcCollect) {
+                System.gc();
+            }
             starttime = System.nanoTime();
             for (int i = 0; i < value; i++) {
                 treetest.lookup(points.get(i).time);

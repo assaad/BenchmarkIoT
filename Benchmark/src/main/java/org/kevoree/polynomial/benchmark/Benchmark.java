@@ -13,6 +13,11 @@ public abstract class Benchmark {
     protected ArrayList<DataPoint> points;
     private String path = "";
     private String datasetName = "";
+    protected boolean gcCollect = true;
+
+    public void setGcCollect(boolean gcCollect){
+        this.gcCollect=gcCollect;
+    }
 
     public void setDataPoints(ArrayList<DataPoint> points) {
         this.points = points;

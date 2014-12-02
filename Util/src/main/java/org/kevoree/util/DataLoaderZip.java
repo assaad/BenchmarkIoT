@@ -30,7 +30,36 @@ public class DataLoaderZip {
         Long timestamp = date.getTime() - date.getTime() % 1000;
         return timestamp;
     }
-    
+
+    public static ArrayList<DataPoint> load(String filename, int maxLines) {
+        String csvFile = baseDir + filename;
+        String line = "";
+        String cvsSplitBy = ",";
+        ArrayList<DataPoint> results = new ArrayList<DataPoint>();
+        try {
+            final ZipFile zf = new ZipFile(csvFile);
+            final Enumeration<? extends ZipEntry> entries = zf.entries();
+            ZipInputStream zipInput = null;
+            while (entries.hasMoreElements() && results.size()<maxLines) {
+                final ZipEntry zipEntry = entries.nextElement();
+                final String fileName = zipEntry.getName();
+                InputStream inputs = zf.getInputStream(zipEntry);
+                BufferedReader br = new BufferedReader(new InputStreamReader(inputs, "UTF-8"));
+                while ((line = br.readLine()) != null && results.size()<maxLines) {
+                    String[] values = line.split(cvsSplitBy);
+                    DataPoint dp = new DataPoint();
+                    dp.time = Long.parseLong(values[0]);
+                    dp.value = Double.parseDouble(values[1]);
+                    results.add(dp);
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return results;
+    }
+
     public static ArrayList<DataPoint> load(String filename) {
         String csvFile = baseDir + filename;
         String line = "";

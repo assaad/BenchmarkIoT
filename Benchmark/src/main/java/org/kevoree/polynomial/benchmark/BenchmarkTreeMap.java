@@ -18,6 +18,9 @@ public class BenchmarkTreeMap extends Benchmark {
             return 0;
 
         for (int j = 0; j < number; j++) {
+            if(gcCollect) {
+                System.gc();
+            }
             TreeMap<Long, Double> treetest = new TreeMap<Long, Double>();
             starttime = System.nanoTime();
             for (int i = 0; i < points.size(); i++) {
@@ -27,7 +30,6 @@ public class BenchmarkTreeMap extends Benchmark {
             res = ((double) (endtime - starttime)) / (1000000000);
             avg += res;
             treetest.clear();
-            System.gc();
         }
         avg = avg / number;
         return avg;
@@ -50,6 +52,10 @@ public class BenchmarkTreeMap extends Benchmark {
         }
 
         for (int j = 0; j < iterations; j++) {
+            if(gcCollect) {
+                System.gc();
+            }
+
             starttime = System.nanoTime();
             for (int i = 0; i < value; i++) {
                 treetest.get(points.get(random.nextInt(points.size())).time);
@@ -57,7 +63,6 @@ public class BenchmarkTreeMap extends Benchmark {
             endtime = System.nanoTime();
             res = ((double) (endtime - starttime)) / (1000000000);
             avg += res;
-            System.gc();
         }
         avg = avg / iterations;
         return avg;
@@ -79,6 +84,9 @@ public class BenchmarkTreeMap extends Benchmark {
         }
 
         for (int j = 0; j < iterations; j++) {
+            if(gcCollect) {
+                System.gc();
+            }
             starttime = System.nanoTime();
             for (int i = 0; i < value; i++) {
                 treetest.get(points.get(i).time);
@@ -86,7 +94,6 @@ public class BenchmarkTreeMap extends Benchmark {
             endtime = System.nanoTime();
             res = ((double) (endtime - starttime)) / (1000000000);
             avg += res;
-            System.gc();
         }
         avg = avg / iterations;
         return avg;
