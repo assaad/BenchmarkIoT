@@ -64,6 +64,7 @@ public class TimePolynomial {
             maxErr = temp;
         }
         return maxErr;*/
+
     }
 
 
@@ -76,10 +77,11 @@ public class TimePolynomial {
             power = power * t;
         }
         return result;*/
+
     }
 
 
-    public boolean insert(long time, double value) {
+    public boolean insert(int id, Long time) {
         //If this is the first point in the set, add it and return
        /* if (weights == null) {
             internal_feed(time, value);
@@ -123,6 +125,11 @@ public class TimePolynomial {
         }
         return false;*/
 
+
+    }
+
+    public Long getTime( int id){
+        
     }
 
 
