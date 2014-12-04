@@ -43,44 +43,43 @@ public class TimePolynomial {
         return weights;
     }
 
+    public Long internal_extrapolate(int id, double[] newWeights){
+        double result = 0;
+        double t = id;
+        double power = 1;
+        for (int j = 0; j < newWeights.length; j++) {
+            result += newWeights[j] * power;
+            power = power * t;
+        }
+        return (long) result;
+    }
+
     public int getSamples(){
         return samples;
     }
 
+    //Not suitable for non-sequential timepoints
     private Long maxError(double[] computedWeights, Long newtime) {
-       /* double maxErr = 0;
-        double temp = 0;
-        Long ds;
-        for (int i = 0; i < sampleTime.size(); i++) {
-            ds = sampleTime.get(i);
-            double val=internal_extrapolate(ds, computedWeights);
-            temp = Math.abs(val - extrapolate(ds));
+        Long maxErr = 0l;
+
+        Long time;
+        Long temp;
+
+        for (int i = 0; i < samples; i++) {
+            time= internal_extrapolate(i,computedWeights);
+            temp = Math.abs(time - getTime(i));
             if (temp > maxErr) {
                 maxErr = temp;
             }
         }
-        temp = Math.abs(internal_extrapolate(time, computedWeights) - value);
+        temp = Math.abs(internal_extrapolate(samples, computedWeights) - newtime);
         if (temp > maxErr) {
             maxErr = temp;
         }
-        return maxErr;*/
-
-
-
+        return maxErr;
     }
 
 
-    private Long internal_extrapolate(int id, double[] weights) {
-       /* double result = 0;
-        double t = ((double) (time - timeOrigin)) / degradeFactor;
-        double power = 1;
-        for (int j = 0; j < weights.length; j++) {
-            result += weights[j] * power;
-            power = power * t;
-        }
-        return result;*/
-
-    }
 
 
     public boolean insert(int id, Long time) {
@@ -111,7 +110,6 @@ public class TimePolynomial {
                 int ss = Math.min(deg * 2, samples);
                 double[] ids = new double[ss + 1];
                 double[] times = new double[ss + 1];
-                int current = samples;
                 int idtemp;
                 for (int i = 0; i < ss; i++) {
                     idtemp= (int) (i*samples/ss);
@@ -133,8 +131,6 @@ public class TimePolynomial {
                 }
             }
             return false;
-
-
         }
         else{
             //trying to insert in past
