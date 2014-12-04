@@ -33,7 +33,7 @@ public class TimePolynomial {
     }
 
 
-    private double getMaxErr(int degree, double toleratedError) {
+    private double getMaxErr(int degree) {
         double tol = toleratedError / Math.pow(2, degree + 0.5);
         return tol;
     }
@@ -47,7 +47,7 @@ public class TimePolynomial {
         return samples;
     }
 
-    private Long maxError(double[] computedWeights, int id, long time) {
+    private Long maxError(double[] computedWeights, Long newtime) {
        /* double maxErr = 0;
         double temp = 0;
         Long ds;
@@ -64,6 +64,8 @@ public class TimePolynomial {
             maxErr = temp;
         }
         return maxErr;*/
+
+
 
     }
 
@@ -83,11 +85,62 @@ public class TimePolynomial {
 
     public boolean insert(int id, Long time) {
         //If this is the first point in the set, add it and return
-       /* if (weights == null) {
-            internal_feed(time, value);
+        if (weights == null) {
+            weights = new double[1];
+            weights[0]=time;
+            samples=1;
             return true;
         }
-        double maxError = getMaxErr(this.getDegree(), toleratedError, maxDegree, prioritization);
+
+        if(time> getTime(samples-1)){
+            //List is ordered
+            //First evaluate if it fits in the current model
+            double maxError = getMaxErr(this.getDegree());
+            if (Math.abs(getTime(samples) - time) <= maxError) {
+                //Here the current time fits
+               ///
+                samples++;
+                return true;
+            }
+
+            //Else increase the degree till maxDegree
+            int deg = getDegree();
+            int newMaxDegree= Math.min(samples,maxDegree);
+            while (deg < newMaxDegree) {
+                deg++;
+                int ss = Math.min(deg * 2, samples);
+                double[] ids = new double[ss + 1];
+                double[] times = new double[ss + 1];
+                int current = samples;
+                int idtemp;
+                for (int i = 0; i < ss; i++) {
+                    idtemp= (int) (i*samples/ss);
+                    ids[i]= idtemp;
+                    times[i]=getTime(idtemp);
+                }
+                ids[ss]=samples;
+                times[ss]=time;
+
+                PolynomialFitEjml pf = new PolynomialFitEjml(deg);
+                pf.fit(ids, times);
+                if (maxError(pf.getCoef(), time) <= maxError) {
+                    weights = new double[pf.getCoef().length];
+                    for (int i = 0; i < pf.getCoef().length; i++) {
+                        weights[i] = pf.getCoef()[i];
+                    }
+                    samples++;
+                    return true;
+                }
+            }
+            return false;
+
+
+        }
+        else{
+            //trying to insert in past
+
+        }
+       /* double maxError = getMaxErr(this.getDegree(), toleratedError, maxDegree, prioritization);
         //If the current model fits well the new value, return
         if (Math.abs(extrapolate(time) - value) <= maxError) {
             samples.add(new DataPoint(time, value));
@@ -125,11 +178,19 @@ public class TimePolynomial {
         }
         return false;*/
 
+        return false;
 
     }
 
     public Long getTime( int id){
-        
+        double result = 0;
+        double t = id;
+        double power = 1;
+        for (int j = 0; j < weights.length; j++) {
+            result += weights[j] * power;
+            power = power * t;
+        }
+        return (long) result;
     }
 
 
