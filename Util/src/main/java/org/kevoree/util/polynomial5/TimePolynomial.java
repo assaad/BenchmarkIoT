@@ -13,15 +13,26 @@ import java.util.List;
 public class TimePolynomial {
 
     //Todo to save and to load
+    private Long timeOrigin;
     private double[] weights;
     private int samples;
 
     private int maxDegree;
     private double toleratedError;
 
-    public TimePolynomial(double toleratedError, int maxDegree, int degradeFactor, Prioritization prioritization) {
+
+    public TimePolynomial(double toleratedError, int maxDegree) {
         this.maxDegree = maxDegree;
         this.toleratedError = toleratedError;
+    }
+
+
+
+    public void setMaxDegree(int maxDegree){
+        this.maxDegree = maxDegree;
+    }
+    public void setToleratedError(double toleratedError){
+        this.toleratedError=toleratedError;
     }
 
     public int getDegree() {
@@ -34,8 +45,8 @@ public class TimePolynomial {
 
 
     private double getMaxErr(int degree) {
-        double tol = toleratedError / Math.pow(2, degree + 0.5);
-        return tol;
+        //double tol = toleratedError / Math.pow(2, degree + 0.5);
+        return toleratedError;
     }
 
 
@@ -51,6 +62,7 @@ public class TimePolynomial {
             result += newWeights[j] * power;
             power = power * t;
         }
+        result=result*(10*toleratedError)+timeOrigin;
         return (long) result;
     }
 
@@ -59,13 +71,13 @@ public class TimePolynomial {
     }
 
     //Not suitable for non-sequential timepoints
-    private Long maxError(double[] computedWeights, Long newtime) {
+    private Long maxError(double[] computedWeights, int lastId, Long newtime) {
         Long maxErr = 0l;
 
         Long time;
         Long temp;
 
-        for (int i = 0; i < samples; i++) {
+        for (int i = 0; i < lastId; i++) {
             time= internal_extrapolate(i,computedWeights);
             temp = Math.abs(time - getTime(i));
             if (temp > maxErr) {
@@ -82,14 +94,16 @@ public class TimePolynomial {
 
 
 
-    public boolean insert(int id, Long time) {
+    public boolean insert(Long time) {
         //If this is the first point in the set, add it and return
         if (weights == null) {
+            timeOrigin=time;
             weights = new double[1];
-            weights[0]=time;
+            weights[0]=0;
             samples=1;
             return true;
         }
+
 
         if(time> getTime(samples-1)){
             //List is ordered
@@ -114,14 +128,14 @@ public class TimePolynomial {
                 for (int i = 0; i < ss; i++) {
                     idtemp= (int) (i*samples/ss);
                     ids[i]= idtemp;
-                    times[i]=getTime(idtemp);
+                    times[i]=(getTime(idtemp)-timeOrigin)/(10*toleratedError);
                 }
                 ids[ss]=samples;
-                times[ss]=time;
+                times[ss]=(time-timeOrigin)/(10*toleratedError);
 
                 PolynomialFitEjml pf = new PolynomialFitEjml(deg);
                 pf.fit(ids, times);
-                if (maxError(pf.getCoef(), time) <= maxError) {
+                if (maxError(pf.getCoef(), samples, time) <= maxError) {
                     weights = new double[pf.getCoef().length];
                     for (int i = 0; i < pf.getCoef().length; i++) {
                         weights[i] = pf.getCoef()[i];
@@ -186,10 +200,14 @@ public class TimePolynomial {
             result += weights[j] * power;
             power = power * t;
         }
+        result=result*(10*toleratedError)+timeOrigin;
         return (long) result;
     }
 
 
-
+    //need to be modified for random access
+    public void removeLast() {
+        samples--;
+    }
 }
 

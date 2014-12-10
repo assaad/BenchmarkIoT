@@ -16,7 +16,7 @@ public class Polynomial  {
     private Long timeOrigin;
     private List<DataPoint> samples = new ArrayList<DataPoint>();
     //private List<Long> sampleTime = new ArrayList<Long>();
-    private TimePolynomial polyTime = new TimePolynomial();
+    private TimePolynomial polyTime ;
     private int degradeFactor;
     private Prioritization prioritization;
     private int maxDegree;
@@ -28,6 +28,7 @@ public class Polynomial  {
         this.prioritization = prioritization;
         this.maxDegree = maxDegree;
         this.toleratedError = toleratedError;
+        polyTime = new TimePolynomial(6000,20);
     }
 
     public List<DataPoint> getSamples() {
@@ -66,7 +67,7 @@ public class Polynomial  {
             weights[0] = value;
             timeOrigin = time;
             samples.add(new DataPoint(time, value));
-            sampleTime.add(time);
+            polyTime.insert(time);
         }
     }
 
@@ -74,8 +75,8 @@ public class Polynomial  {
         double maxErr = 0;
         double temp = 0;
         Long ds;
-        for (int i = 0; i < sampleTime.size(); i++) {
-            ds = sampleTime.get(i);
+        for (int i = 0; i < polyTime.getSamples(); i++) {
+            ds = polyTime.getTime(i);
             double val=internal_extrapolate(ds, computedWeights);
             temp = Math.abs(val - extrapolate(ds));
             if (temp > maxErr) {
@@ -123,43 +124,50 @@ public class Polynomial  {
             internal_feed(time, value);
             return true;
         }
-        double maxError = getMaxErr(this.getDegree(), toleratedError, maxDegree, prioritization);
-        //If the current model fits well the new value, return
-        if (Math.abs(extrapolate(time) - value) <= maxError) {
-            samples.add(new DataPoint(time, value));
-            sampleTime.add(time);
-            return true;
-        }
-        //If not, first check if we can increase the degree
-        int deg = getDegree();
-        int newMaxDegree= Math.min(sampleTime.size(),maxDegree);
-        while (deg < newMaxDegree) {
-            deg++;
-            int ss = Math.min(deg * 2, sampleTime.size());
-            double[] times = new double[ss + 1];
-            double[] values = new double[ss + 1];
-            int current = sampleTime.size();
-            for (int i = 0; i < ss; i++) {
 
-                Long ds = sampleTime.get(i * current / ss);
-                times[i] = ((double) (ds - timeOrigin)) / degradeFactor;
-                values[i] = extrapolate(ds);
-            }
-            times[ss] = ((double) (time - timeOrigin)) / degradeFactor;
-            values[ss] = value;
-            PolynomialFitEjml pf = new PolynomialFitEjml(deg);
-            pf.fit(times, values);
-            if (maxError(pf.getCoef(), time, value) <= maxError) {
-                weights = new double[pf.getCoef().length];
-                for (int i = 0; i < pf.getCoef().length; i++) {
-                    weights[i] = pf.getCoef()[i];
-                }
+
+        //Check if time fits first
+        if(polyTime.insert(time)==true) {
+            double maxError = getMaxErr(this.getDegree(), toleratedError, maxDegree, prioritization);
+            //If the current model fits well the new value, return
+            if (Math.abs(extrapolate(time) - value) <= maxError) {
                 samples.add(new DataPoint(time, value));
-                sampleTime.add(time);
                 return true;
             }
+            //If not, first check if we can increase the degree
+            int deg = getDegree();
+            int newMaxDegree = Math.min(polyTime.getSamples()-1, maxDegree);
+            while (deg < newMaxDegree) {
+                deg++;
+                int ss = Math.min(deg * 2, polyTime.getSamples()-1);
+                double[] times = new double[ss + 1];
+                double[] values = new double[ss + 1];
+                int current = polyTime.getSamples()-1;
+                for (int i = 0; i < ss; i++) {
+
+                    Long ds = polyTime.getTime((int) (i * current / ss));
+                    times[i] = ((double) (ds - timeOrigin)) / degradeFactor;
+                    values[i] = extrapolate(ds);
+                }
+                times[ss] = ((double) (time - timeOrigin)) / degradeFactor;
+                values[ss] = value;
+                PolynomialFitEjml pf = new PolynomialFitEjml(deg);
+                pf.fit(times, values);
+                if (maxError(pf.getCoef(), time, value) <= maxError) {
+                    weights = new double[pf.getCoef().length];
+                    for (int i = 0; i < pf.getCoef().length; i++) {
+                        weights[i] = pf.getCoef()[i];
+                    }
+                    samples.add(new DataPoint(time, value));
+                    return true;
+                }
+            }
+            polyTime.removeLast();
+            return false;
         }
-        return false;
+        else{
+            return false;
+        }
     }
 
     private static final char sep = '|';

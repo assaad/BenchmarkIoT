@@ -17,6 +17,8 @@ public class PolynomialModel {
     private TreeMap<Long, Polynomial> polynomTree = new TreeMap<Long, Polynomial>();
     private Polynomial defaultPolynomialExtrapolation;
 
+    private int feedCounter =0;
+
     public PolynomialModel(int degradeFactor, double toleratedError, int maxDegree) {
         if (degradeFactor == 0) {
             degradeFactor = 1;
@@ -27,6 +29,8 @@ public class PolynomialModel {
     }
 
     public void feed(long time, double value) {
+        feedCounter++;
+
         if (defaultPolynomialExtrapolation == null) {
             defaultPolynomialExtrapolation = new Polynomial(time, toleratedError, maxDegree, degradeFactor, prioritization);
             defaultPolynomialExtrapolation.insert(time, value);

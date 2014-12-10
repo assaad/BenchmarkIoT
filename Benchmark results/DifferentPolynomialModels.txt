@@ -1,6 +1,6 @@
-Saving both time and value, sequential degree
-------------------------------------------------
-Loaded :4581434 values in 20.958647232 s!
+Saving both time and value
+--------------------------
+Loaded :4581434 values in 8.549390207 s!
 Total number of samples: 4810279
 Total number of Polynoms: 228846
 Total doubles in polynoms: 921721
@@ -9,14 +9,15 @@ Time points compression: 95.24256285342285 %
 Disk compression: 88.0405377733807 %
 Maximum error: 7.071035184467167E-4 at time: 1104737700000 original value was: 1.3502 calculated value: 1.3494928964815534
 Average error: 1.8425370033776993E-4
-Statistic calculated in: 164.501826 ms!
-Polynomial chain reconstructed in: 657.097677 ms!
-Polynomial fast reconstructed in: 203.843383 ms!
-normal chain in: 1230.354024 ms!
+Statistic calculated in: 140.262163 ms!
+Polynomial chain reconstructed in: 573.026244 ms!
+Polynomial fast reconstructed in: 157.868962 ms!
+normal chain in: 917.116801 ms!
 
-Saving only time, sequential degree
-------------------------------------------------
-Loaded :4581434 values in 16.681729769 s!
+
+Saving only time
+----------------
+Loaded :4581434 values in 10.349817554 s!
 Total number of samples: 4794245
 Total number of Polynoms: 212812
 Total doubles in polynoms: 1037721
@@ -25,28 +26,10 @@ Time points compression: 95.5610946040513 %
 Disk compression: 86.95797774206366 %
 Maximum error: 0.0016166468362002195 at time: 1140718620000 original value was: 1.1915 calculated value: 1.1931166468362002
 Average error: 2.0437539711383866E-4
-Statistic calculated in: 220.045196 ms!
-Polynomial chain reconstructed in: 688.435829 ms!
-Polynomial fast reconstructed in: 230.808646 ms!
-normal chain in: 1186.639957 ms!
+Statistic calculated in: 150.947669 ms!
+Polynomial chain reconstructed in: 542.550228 ms!
+Polynomial fast reconstructed in: 167.645696 ms!
+normal chain in: 922.595991 ms!
 
-
-Saving only time, max degree
-------------------------------------------------
-Loaded :4581434 values in 25.780000038 s!
-Total number of samples: 4742427
-Total number of Polynoms: 160994
-Total doubles in polynoms: 1415731
-Average degrees in polynoms: 7.793687963526591
-Time points compression: 96.60524031260786 %
-Disk compression: 83.3763914552612 %
-Maximum error: 0.0016414469800486442 at time: 967098420000 original value was: 0.9002 calculated value: 0.9018414469800486
-Average error: 2.091397592545425E-4
-Statistic calculated in: 286.52003 ms!
-Polynomial chain reconstructed in: 983.716461 ms!
-Polynomial fast reconstructed in: 327.559579 ms!
-normal chain in: 4303.091318 ms!
-
-
-Saving both time and value, max degree
-------------------------------------------------
+Polynomial time
+----------------

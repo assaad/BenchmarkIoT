@@ -1,6 +1,6 @@
 package org.kevoree.util;
 
-import org.kevoree.util.polynomial4.PolynomialModel;
+import org.kevoree.util.polynomial5.PolynomialModel;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -42,7 +42,8 @@ public class TestPolynomial {
         ArrayList<Double> valss = new ArrayList<Double>();
 
         starttime = System.nanoTime();
-        String csvFile = "D:\\workspace\\Github\\kevoree-brain\\org.kevoree.brain.learning\\src\\main\\resources\\neweur.csv";
+        //String csvFile = "D:\\workspace\\Github\\kevoree-brain\\org.kevoree.brain.learning\\src\\main\\resources\\neweur.csv";
+        String csvFile = "/Users/assaad/work/github/kevoree-brain/org.kevoree.brain.learning/src/main/resources/neweur.csv";
         BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ",";
@@ -56,10 +57,10 @@ public class TestPolynomial {
                 Long timestamp = Long.parseLong(values[2]);
                 Double val = Double.parseDouble(values[3]);
                 eurUsd.put(timestamp, val);
-
                 pm.feed(timestamp, val);
                 timestamps.add(timestamp);
                 valss.add(val);
+
             }
 
         } catch (Exception ex) {
@@ -80,6 +81,24 @@ public class TestPolynomial {
 
         Long initTimeStamp = getTimeStamp(2001,01,01,00,00);
         Long finalTimeStamp= getTimeStamp(2014,9,26,00,00);
+
+
+        double max=0;
+        long itest=0l;
+        starttime = System.nanoTime();
+        for(int i=0; i<timestamps.size();i++){
+            double val = pm.fastReconstruct(timestamps.get(i));
+            double val2 = valss.get(i);
+            if(Math.abs(val2-val)>max){
+                max=Math.abs(val2-val);
+                itest=i;
+            }
+        }
+        endtime = System.nanoTime();
+        res=((double)(endtime-starttime))/(1000000);
+        System.out.println("TEST TEST: "+res+" ms! ERROR "+ max+" @ "+ itest);
+
+        /*
         starttime = System.nanoTime();
         for(long i=initTimeStamp; i<finalTimeStamp;i+=degradeFactor){
             double val = pm.reconstruct(i);
@@ -106,6 +125,7 @@ public class TestPolynomial {
         res=((double)(endtime-starttime))/(1000000);
         System.out.println("normal chain in: "+res+" ms!");
 
+*/
 
     }
 }
