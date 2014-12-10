@@ -28,7 +28,7 @@ public class Polynomial  {
         this.prioritization = prioritization;
         this.maxDegree = maxDegree;
         this.toleratedError = toleratedError;
-        polyTime = new TimePolynomial(6000,20);
+        polyTime = new TimePolynomial(60000,20);
     }
 
     public List<DataPoint> getSamples() {

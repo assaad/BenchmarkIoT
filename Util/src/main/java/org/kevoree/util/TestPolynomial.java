@@ -33,7 +33,7 @@ public class TestPolynomial {
         long timeOrigine = getTimeStamp(2000, 5, 30, 17, 27);
         int degradeFactor = 60000;
         double toleratedError = 0.001;
-        int maxDegree = 10;
+        int maxDegree = 4;
 
         TreeMap<Long, Double> eurUsd = new TreeMap<Long, Double>();
         PolynomialModel pm = new PolynomialModel(degradeFactor,toleratedError,maxDegree);
@@ -83,7 +83,8 @@ public class TestPolynomial {
         Long finalTimeStamp= getTimeStamp(2014,9,26,00,00);
 
 
-        double max=0;
+      /*  double max=0;
+
         long itest=0l;
         starttime = System.nanoTime();
         for(int i=0; i<timestamps.size();i++){
@@ -96,9 +97,9 @@ public class TestPolynomial {
         }
         endtime = System.nanoTime();
         res=((double)(endtime-starttime))/(1000000);
-        System.out.println("TEST TEST: "+res+" ms! ERROR "+ max+" @ "+ itest);
+        System.out.println("TEST TEST: "+res+" ms! ERROR "+ max+" @ "+ itest);*/
 
-        /*
+
         starttime = System.nanoTime();
         for(long i=initTimeStamp; i<finalTimeStamp;i+=degradeFactor){
             double val = pm.reconstruct(i);
@@ -125,7 +126,6 @@ public class TestPolynomial {
         res=((double)(endtime-starttime))/(1000000);
         System.out.println("normal chain in: "+res+" ms!");
 
-*/
 
     }
 }

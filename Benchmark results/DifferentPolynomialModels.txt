@@ -33,3 +33,16 @@ normal chain in: 922.595991 ms!
 
 Polynomial time
 ----------------
+Loaded :4581434 values in 15.948205349 s!
+Total number of samples: 5727894
+Total number of Polynoms: 1158065
+Total doubles in polynoms: 5710625
+Average degrees in polynoms: 3.9311783017360855
+Time points compression: 79.78201063078332 %
+Disk compression: 40.041750074285595 %
+Maximum error: 0.0011224530018320023 at time: 961043280000 original value was: 0.9526 calculated value: 0.951477546998168
+Average error: 2.2437514511383866E-4
+Statistic calculated in: 295.812374 ms!
+Polynomial chain reconstructed in: 782.692287 ms!
+Polynomial fast reconstructed in: 364.989231 ms!
+normal chain in: 1085.277373 ms!
