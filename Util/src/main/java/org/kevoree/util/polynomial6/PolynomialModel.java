@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 
 public class PolynomialModel {
-    private int degradeFactor;
     private double toleratedError;
     private int maxDegree;
     private Prioritization prioritization = Prioritization.LOWDEGREES;
@@ -19,11 +18,7 @@ public class PolynomialModel {
 
     private int feedCounter =0;
 
-    public PolynomialModel(int degradeFactor, double toleratedError, int maxDegree) {
-        if (degradeFactor == 0) {
-            degradeFactor = 1;
-        }
-        this.degradeFactor = degradeFactor;
+    public PolynomialModel(double toleratedError, int maxDegree) {
         this.toleratedError = toleratedError;
         this.maxDegree = maxDegree;
     }
@@ -95,6 +90,7 @@ public class PolynomialModel {
                 global.time = temp.time;
                 global.value = temp.value;
                 global.calculatedValue = temp.calculatedValue;
+               // System.out.println(pol);
             }
             global.avgError += temp.avgError * temp.samples;
             global.samples += temp.samples;

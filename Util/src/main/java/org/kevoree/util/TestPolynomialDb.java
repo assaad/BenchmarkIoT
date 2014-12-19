@@ -12,7 +12,7 @@ import java.util.TreeMap;
 /**
  * Created by Assaad on 02/12/2014.
  */
-public class TestPolynomial {
+public class TestPolynomialDb {
     public static Long getTimeStamp(int year, int month, int day, int hour, int min) {
         Calendar cal = Calendar.getInstance();
         cal.set(year, month - 1, day, hour, min, 0);
@@ -30,39 +30,27 @@ public class TestPolynomial {
         long endtime;
         double res;
 
-        long timeOrigine = getTimeStamp(2000, 5, 30, 17, 27);
-        int degradeFactor = 60000;
-        double toleratedError = 0.001;
+        TreeMap<Long, Double> eurUsd = new TreeMap<Long, Double>();
+        int degradeFactor = 1;
+        double toleratedError = 0.9;
         int maxDegree = 20;
 
-        TreeMap<Long, Double> eurUsd = new TreeMap<Long, Double>();
-       // PolynomialModel pm = new PolynomialModel(degradeFactor,toleratedError,maxDegree);
-        PolynomialModel pm = new PolynomialModel(toleratedError,maxDegree);
-
-
-        ArrayList<Long> timestamps = new ArrayList<Long>();
-        ArrayList<Double> valss = new ArrayList<Double>();
-
         starttime = System.nanoTime();
-        //String csvFile = "D:\\workspace\\Github\\kevoree-brain\\org.kevoree.brain.learning\\src\\main\\resources\\neweur.csv";
-        String csvFile = "/Users/assaad/work/github/kevoree-brain/org.kevoree.brain.learning/src/main/resources/neweur.csv";
-        BufferedReader br = null;
-        String line = "";
-        String cvsSplitBy = ",";
+        DataLoaderZip.setBaseDir("/Users/assaad/work/github/BenchmarkIoT/DataSets/");
+        final ArrayList<DataPoint> points = DataLoaderZip.load("ds0.zip");
+        endtime = System.nanoTime();
+        res = ((double) (endtime - starttime)) / (1000000000);
+        System.out.println("Loaded :" + points.size() + " values in " + res + " s!");
+
+        PolynomialModel pm =new PolynomialModel(toleratedError,maxDegree);
+
+       // PolynomialModel pm =new PolynomialModel(degradeFactor,toleratedError,maxDegree);
+
         try {
 
-            br = new BufferedReader(new FileReader(csvFile));
-            while ((line = br.readLine()) != null) {
-
-                // use comma as separator
-                String[] values = line.split(cvsSplitBy);
-                Long timestamp = Long.parseLong(values[2]);
-                Double val = Double.parseDouble(values[3]);
-                eurUsd.put(timestamp, val);
-                pm.feed(timestamp, val);
-                timestamps.add(timestamp);
-                valss.add(val);
-
+            for(DataPoint dp: points){
+                pm.feed(dp.time,dp.value);
+                eurUsd.put(dp.time,dp.value);
             }
 
         } catch (Exception ex) {
@@ -71,7 +59,7 @@ public class TestPolynomial {
         pm.finalSave();
         endtime = System.nanoTime();
         res = ((double) (endtime - starttime)) / (1000000000);
-        System.out.println("Loaded :" + eurUsd.size() + " values in " + res + " s!");
+        System.out.println("Loaded polynomial :" + points.size() + " values in " + res + " s!");
 
         starttime = System.nanoTime();
         pm.displayStatistics(true);
@@ -81,8 +69,8 @@ public class TestPolynomial {
 
 
 
-        Long initTimeStamp = getTimeStamp(2001,01,01,00,00);
-        Long finalTimeStamp= getTimeStamp(2014,9,26,00,00);
+        Long initTimeStamp = points.get(0).time;
+        Long finalTimeStamp=  points.get(points.size()-1).time;
 
 
       /*  double max=0;

@@ -13,38 +13,14 @@ public class TestPoly2 {
 
     public static void main(String[] args){
 
-        TimePolynomial tp = new TimePolynomial();
 
-        //long[] tmp = {1234l,1236l,1238l,1242l};
+        PolynomialModel pm = new PolynomialModel(0.3,20);
 
-        long[] tmp = new long[1000];
-        tmp[0]=1234567000l;
-
-
-        int period=10000;
-        int variance=10;
-        Random random=new Random();
-
-        for(int i=1; i<tmp.length;i++){
-            tmp[i]=tmp[i-1]+period+random.nextInt(variance*2)-variance;
+        for(int i=0; i<1000; i++){
+            pm.feed(10*i+1205870,5+2.4*i+7*i*i);
         }
-
-        for(int i=0; i<tmp.length;i++){
-            if(tp.insert(tmp[i])==false){
-             System.out.println("Stop inserting at: "+ i);
-                break;
-            }
-        }
-
-        System.out.println("Sample inserted: "+tp.getSamples());
-        for(int i=0; i<tp.getSamples();i++){
-           // System.out.println("["+i+"]: "+tp.getTime(i));
-
-            if(Math.abs((tp.getTime(i)-tmp[i]))>(period/5)){
-                System.out.println("Error at " + i);
-            }
-        }
-        System.out.println("Done");
+        pm.finalSave();
+        pm.displayStatistics(true);
 
     }
 

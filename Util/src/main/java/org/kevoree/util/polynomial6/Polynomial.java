@@ -74,7 +74,7 @@ public class Polynomial  {
         double maxErr = 0;
         double temp = 0;
         double ds;
-        for (int i = 0; i < polyTime.getSamples(); i++) {
+        for (int i = 0; i < polyTime.getSamples()-1; i++) {
             ds = polyTime.getNormalizedTime(i);
             double val=internal_extrapolate(ds, computedWeights);
             temp = Math.abs(val - internal_extrapolate(ds, weights));
@@ -82,7 +82,7 @@ public class Polynomial  {
                 maxErr = temp;
             }
         }
-        temp = Math.abs(internal_extrapolate(time, computedWeights) - value);
+        temp = Math.abs(internal_extrapolate(polyTime.convertLongToDouble(time), computedWeights) - value);
         if (temp > maxErr) {
             maxErr = temp;
         }
@@ -136,7 +136,7 @@ public class Polynomial  {
             //If not, first check if we can increase the degree
             int deg = getDegree();
             int newMaxDegree = Math.min(polyTime.getSamples()-1, maxDegree);
-            while (deg < newMaxDegree) {
+            if (deg < newMaxDegree) {
                 deg++;
                 int ss = Math.min(deg * 2, polyTime.getSamples()-1);
                 double[] times = new double[ss + 1];
