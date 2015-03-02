@@ -12,12 +12,13 @@ import java.util.ArrayList;
 public class ExecutorTree {
     public static void main(String[] args) throws IOException {
 
-        Benchmark[] toRun = new Benchmark[4];
+        Benchmark[] toRun = new Benchmark[5];
 
         toRun[0] = new BenchmarkEmpty();
         toRun[1] = new BenchmarkTreeMap();
         toRun[2] = new BenchmarkRbTree();
         toRun[3] = new BenchmarkLongRbTree();
+        toRun[4] = new BenchmarkPolynomialTreeMap();
 
         long starttime;
         long endtime;
@@ -26,7 +27,7 @@ public class ExecutorTree {
         //DataLoaderZip.setBaseDir("/Users/duke/Documents/dev/assaad/BenchmarkIoT/DataSets/");
         DataLoaderZip.setBaseDir("/Users/assaad/work/github/BenchmarkIoT/DataSets/");
         //DataLoaderZip.setBaseDir("D:\\workspace\\Github\\PolynomialModel\\DataSets\\");
-        final ArrayList<DataPoint> points = DataLoaderZip.load("ds1.zip",2000000);
+        final ArrayList<DataPoint> points = DataLoaderZip.load("ds1.zip");
         endtime = System.nanoTime();
         res = ((double) (endtime - starttime)) / (1000000000);
         System.out.println("Loaded :" + points.size() + " values in " + res + " s!");

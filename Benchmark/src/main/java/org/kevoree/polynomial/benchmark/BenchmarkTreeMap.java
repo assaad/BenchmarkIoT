@@ -89,7 +89,7 @@ public class BenchmarkTreeMap extends Benchmark {
             }
             starttime = System.nanoTime();
             for (int i = 0; i < value; i++) {
-                treetest.floorEntry(points.get(i).time);
+                treetest.get(points.get(i).time);
             }
             endtime = System.nanoTime();
             res = ((double) (endtime - starttime)) / (1000000000);
@@ -101,6 +101,6 @@ public class BenchmarkTreeMap extends Benchmark {
 
     @Override
     public String getBenchmarkName() {
-        return "Tree Map";
+        return "Java Tree Map";
     }
 }
