@@ -3,6 +3,7 @@ package org.kevoree.polynomial.benchmark;
 import org.kevoree.util.DataPoint;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by assaa_000 on 25/11/2014.
@@ -36,6 +37,7 @@ public class BenchmarkEmpty extends Benchmark {
         long starttime;
         long endtime;
         double res;
+        Random random = new Random();
 
         double avg = 0;
         if (iterations <= 0)
@@ -44,6 +46,7 @@ public class BenchmarkEmpty extends Benchmark {
         for (int j = 0; j < iterations; j++) {
             starttime = System.nanoTime();
             for (int i = 0; i < values; i++) {
+                random.nextInt(points.size());
             }
             endtime = System.nanoTime();
             res = ((double) (endtime - starttime)) / (1000000000);

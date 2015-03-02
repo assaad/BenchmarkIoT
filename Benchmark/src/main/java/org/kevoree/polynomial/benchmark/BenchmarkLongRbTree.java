@@ -1,7 +1,6 @@
 package org.kevoree.polynomial.benchmark;
 
-import org.kevoree.modeling.api.time.rbtree.LongRBTree;
-import org.kevoree.modeling.api.time.rbtree.State;
+import org.kevoree.modeling.api.rbtree.LongRBTree;
 
 import java.util.Random;
 
@@ -61,7 +60,7 @@ public class BenchmarkLongRbTree extends Benchmark {
             }
             starttime = System.nanoTime();
             for (int i = 0; i < value; i++) {
-                treetest.lookup(points.get(random.nextInt(points.size())).time);
+                treetest.previousOrEqual(points.get(random.nextInt(points.size())).time);
             }
             endtime = System.nanoTime();
             res = ((double) (endtime - starttime)) / (1000000000);
@@ -93,7 +92,7 @@ public class BenchmarkLongRbTree extends Benchmark {
             }
             starttime = System.nanoTime();
             for (int i = 0; i < value; i++) {
-                treetest.lookup(points.get(i).time);
+                treetest.previousOrEqual(points.get(i).time);
             }
             endtime = System.nanoTime();
             res = ((double) (endtime - starttime)) / (1000000000);

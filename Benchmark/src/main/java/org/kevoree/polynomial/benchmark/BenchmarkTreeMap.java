@@ -58,7 +58,7 @@ public class BenchmarkTreeMap extends Benchmark {
 
             starttime = System.nanoTime();
             for (int i = 0; i < value; i++) {
-                treetest.get(points.get(random.nextInt(points.size())).time);
+                treetest.floorEntry(points.get(random.nextInt(points.size())).time);
             }
             endtime = System.nanoTime();
             res = ((double) (endtime - starttime)) / (1000000000);
@@ -89,7 +89,7 @@ public class BenchmarkTreeMap extends Benchmark {
             }
             starttime = System.nanoTime();
             for (int i = 0; i < value; i++) {
-                treetest.get(points.get(i).time);
+                treetest.floorEntry(points.get(i).time);
             }
             endtime = System.nanoTime();
             res = ((double) (endtime - starttime)) / (1000000000);

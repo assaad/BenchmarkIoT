@@ -13,6 +13,5 @@ public class DataPoint {
     public DataPoint(long time, double value) {
         this.time=time;
         this.value=value;
-
     }
 }
