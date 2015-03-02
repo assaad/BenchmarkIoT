@@ -1,5 +1,6 @@
 package org.kevoree.polynomial.benchmark;
 
+import org.kevoree.util.DataPoint;
 import org.kevoree.util.polynomial.PolynomialModel;
 
 import java.util.Random;
@@ -62,7 +63,8 @@ public class BenchmarkPolynomialTreeMap extends Benchmark {
             }
             starttime = System.nanoTime();
             for (int i = 0; i < value; i++) {
-                pm.fastReconstruct(points.get(random.nextInt(points.size())).time);
+                DataPoint p=points.get(random.nextInt(points.size()));
+                pm.fastReconstruct(p.time);
             }
             pm.finalSave();
             endtime = System.nanoTime();
