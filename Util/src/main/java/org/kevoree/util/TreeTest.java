@@ -1,4 +1,4 @@
-package org.kevoree.polynomial.benchmark;
+package org.kevoree.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
