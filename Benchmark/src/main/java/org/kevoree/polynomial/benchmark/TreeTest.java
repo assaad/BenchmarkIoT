@@ -1,0 +1,75 @@
+package org.kevoree.polynomial.benchmark;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
+import java.util.TreeMap;
+
+/**
+ * Created by assaad on 03/03/15.
+ */
+public class TreeTest {
+    public static void main(String[] arg){
+        TreeMap<Long, Double> testing = new TreeMap<Long, Double>();
+        int max=10000000;
+        int number=10;
+
+        Random random=new Random();
+        long starttime;
+        long endtime;
+        double res;
+
+        double total=0;
+
+        long seed = System.nanoTime();
+        ArrayList<Long> values = new ArrayList<Long>();
+
+
+
+        for(long i=0;i<max;i++){
+            values.add(i);
+            double vv=random.nextDouble();
+            total+=vv;
+            testing.put(i,vv);
+        }
+
+
+        double avg = 0;
+        double val=0;
+
+
+        for (int j = 0; j < number; j++) {
+            val=0;
+            starttime = System.nanoTime();
+            for (int i=0;i<max;i++) {
+                val+=testing.get(values.get(i));
+            }
+            endtime = System.nanoTime();
+            res = ((double) (endtime - starttime)) / (1000000000);
+            avg += res;
+        }
+        avg = avg / number;
+        System.out.println("Before "+total+" after "+val);
+        System.out.println("Sequential read avg: "+avg+" s");
+
+
+        Collections.shuffle(values, new Random(seed));
+
+        avg = 0;
+        for (int j = 0; j < number; j++) {
+            val=0;
+            starttime = System.nanoTime();
+            for (int i=0;i<max;i++) {
+                val+=testing.get(values.get(i));
+            }
+            endtime = System.nanoTime();
+            res = ((double) (endtime - starttime)) / (1000000000);
+            avg += res;
+        }
+        avg = avg / number;
+        System.out.println("Before "+total+" after "+val);
+        System.out.println("Random read avg: "+avg+" s");
+
+
+    }
+}
