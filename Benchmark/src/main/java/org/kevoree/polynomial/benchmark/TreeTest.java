@@ -11,8 +11,8 @@ import java.util.TreeMap;
 public class TreeTest {
     public static void main(String[] arg){
         TreeMap<Long, Double> testing = new TreeMap<Long, Double>();
-        int max=10000000;
-        int number=10;
+        int max=2000000;
+        int number=20;
 
         Random random=new Random();
         long starttime;
@@ -49,7 +49,7 @@ public class TreeTest {
             avg += res;
         }
         avg = avg / number;
-        System.out.println("Before "+total+" after "+val);
+        System.out.println("Original sum "+total+" after sequential "+val);
         System.out.println("Sequential read avg: "+avg+" s");
 
 
@@ -69,7 +69,7 @@ public class TreeTest {
             avg += res;
         }
         avg = avg / number;
-        System.out.println("Before "+total+" after "+val);
+        System.out.println("Original sum "+total+" after random "+val);
         System.out.println("Random read avg: "+avg+" s");
 
 
