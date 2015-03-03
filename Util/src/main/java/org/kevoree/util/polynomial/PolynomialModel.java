@@ -38,6 +38,7 @@ public class PolynomialModel {
         polynomTree.put(defaultPolynomialExtrapolation.getTimeOrigin(), defaultPolynomialExtrapolation);
 
         defaultPolynomialExtrapolation = new Polynomial(newPrev.time, toleratedError, maxDegree, degradeFactor, prioritization);
+        polynomTree.put(defaultPolynomialExtrapolation.getTimeOrigin(), defaultPolynomialExtrapolation);
 
         defaultPolynomialExtrapolation.insert(newPrev.time,newPrev.value);
         defaultPolynomialExtrapolation.insert(time,value);
@@ -45,11 +46,7 @@ public class PolynomialModel {
 
     }
 
-    public void finalSave() {
-        if (defaultPolynomialExtrapolation != null) {
-            polynomTree.put(defaultPolynomialExtrapolation.getTimeOrigin(), defaultPolynomialExtrapolation);
-        }
-    }
+
 
     public double reconstruct(long time) {
         long timeO = polynomTree.floorKey(time);

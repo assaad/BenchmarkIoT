@@ -8,59 +8,36 @@ import org.kevoree.util.dbdrivers.MongoDbDataBase;
  * Created by assaa_000 on 25/11/2014.
  */
 public class BenchmarkMongoDb extends Benchmark {
+    MongoDbDataBase mdb;
+
+
     @Override
-    public double benchmarkWrite(int iterations) {
-        long starttime;
-        long endtime;
-        double res;
-
-        double avg = 0;
-        if (iterations <= 0)
-            return 0;
-
-        try {
-            MongoDbDataBase mdb = new MongoDbDataBase("localhost", 27017, "mydb");
-
-            for (int j = 0; j < iterations; j++) {
-                if(gcCollect) {
-                    System.gc();
-                }
-                mdb.clean();
-                starttime = System.nanoTime();
-                for (int i = 0; i < points.size(); i++) {
-                    String[] payloads = new String[2];
-                    payloads[0] = String.valueOf(points.get(0).time);
-                    payloads[1] = String.valueOf(points.get(0).value);
-                    mdb.put(payloads);
-                    if (i % 1000000 == 0) {
-                        System.out.println(i);
-                    }
-                }
-                endtime = System.nanoTime();
-                res = ((double) (endtime - starttime)) / (1000000000);
-                avg += res;
-            }
-            avg = avg / iterations;
-            return avg;
+    public void init() {
+        try{
+        mdb = new MongoDbDataBase("localhost", 27017, "mydb");
+            mdb.clean();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return 0;
-    }
-
-    @Override
-    public double benchmarkRandomRead(int iterations, int values) {
-        return 0;
-    }
-
-    @Override
-    public double benchmarkSequencialRead(int iterations, int values) {
-        return 0;
     }
 
 
     @Override
     public String getBenchmarkName() {
         return "Mongo Db";
+    }
+
+    @Override
+    public void put(long t, double value) {
+        String[] payloads = new String[2];
+        payloads[0] = String.valueOf(t);
+        payloads[1] = String.valueOf(value);
+        mdb.put(payloads);
+
+    }
+
+    @Override
+    public double get(long t) {
+        return Double.valueOf(mdb.get(String.valueOf(t)));
     }
 }
