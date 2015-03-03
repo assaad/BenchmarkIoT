@@ -53,7 +53,9 @@ public class TreeTest {
         System.out.println("Sequential read avg: "+avg+" s");
 
 
+        System.out.println("Before shuffling, value at 0: "+values.get(0));
         Collections.shuffle(values, new Random(seed));
+        System.out.println("Shuffle completed, value at 0: "+values.get(0));
 
         avg = 0;
         for (int j = 0; j < number; j++) {
