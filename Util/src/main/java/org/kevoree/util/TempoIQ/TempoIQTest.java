@@ -4,6 +4,8 @@ import org.joda.time.DateTime;
 import org.kevoree.util.*;
 import org.kevoree.util.DataPoint;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +18,28 @@ import java.util.Map;
  */
 public class TempoIQTest {
     public static void main(String[] args){
-        Credentials creds = new Credentials("aeb6ba92253a48258e8f0fcbed7b9472", "9122c838f9c84e9eb76f0387d428fdaf");
+        String csvFile = "/Users/assaad/work/github/BenchmarkIoT/password.txt";
+        BufferedReader br = null;
+        String line = "";
+        String cvsSplitBy = ",";
+
+        String[] auths =new String[2];
+        ArrayList<DataPoint> results = new ArrayList<DataPoint>();
+
+
+        try {
+            br = new BufferedReader(new FileReader(csvFile));
+            line = br.readLine();
+            auths= line.split(cvsSplitBy);
+
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+
+
+        Credentials creds = new Credentials(auths[0],auths[1]);
         InetSocketAddress socket = new InetSocketAddress("t6vua2-trial.backend.tempoiq.com",443);
         Client client = new Client(creds,socket,"https");
 

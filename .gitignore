@@ -11,3 +11,4 @@ log/
 **.DS_Store
 /gen/
 /lib/
+/password.txt
