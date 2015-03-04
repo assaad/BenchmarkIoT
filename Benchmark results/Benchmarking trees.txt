@@ -4,15 +4,15 @@ Writing on Tree Map: 12.291895216300002 s
 Writing on Rb Tree: 3.3429777004999996 s
 Writing on Long Rb Tree: 3.9347792171 s
 -----------------------------------------------
+Sequential reading on Empty iteration: 2.634605E-4 s
+Sequential reading on Tree Map: 4.194089985499999 s
+Sequential reading on Rb Tree: 1.3650854223 s
+Sequential reading on Long Rb Tree: 0.7890230749 s
+-----------------------------------------------
 Random reading on Empty iteration: 3.053497E-4 s
 Random reading on Tree Map: 21.0789072337 s
 Random reading on Rb Tree: 18.6475891903 s
 Random reading on Long Rb Tree: 13.932107664799997 s
------------------------------------------------
-Sequencial reading on Empty iteration: 2.634605E-4 s
-Sequencial reading on Tree Map: 4.194089985499999 s
-Sequencial reading on Rb Tree: 1.3650854223 s
-Sequencial reading on Long Rb Tree: 0.7890230749 s
 -----------------------------------------------
 RAM used on Empty iteration: 492 Mb
 RAM used on Tree Map: 611 Mb
