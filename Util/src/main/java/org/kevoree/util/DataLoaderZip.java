@@ -57,6 +57,7 @@ public class DataLoaderZip {
 
             }
         } catch (Exception e) {
+
             e.printStackTrace();
         }
         return results;
@@ -67,10 +68,11 @@ public class DataLoaderZip {
             org.uncommons.maths.random.MersenneTwisterRNG rng = new MersenneTwisterRNG();
             ArrayList<DataPoint> results = new ArrayList<DataPoint>();
             long t=0;
-            for (int i=0; i<12000000; i++) {
+            for (int i=0; i<4000000; i++) {
                 DataPoint dp = new DataPoint();
                 dp.time = t;
-                dp.value = rng.nextDouble()*1000;
+                dp.value = rng.nextDouble()*100;
+                results.add(dp);
                 t++;
             }
             return results;

@@ -28,6 +28,7 @@ public class PolynomialModel {
         if (defaultPolynomialExtrapolation == null) {
             defaultPolynomialExtrapolation = new Polynomial(time, toleratedError, maxDegree, degradeFactor, prioritization);
             defaultPolynomialExtrapolation.insert(time, value);
+            polynomTree.put(defaultPolynomialExtrapolation.getTimeOrigin(), defaultPolynomialExtrapolation);
             return;
         }
         if (defaultPolynomialExtrapolation.insert(time, value)) {

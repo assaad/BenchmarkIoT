@@ -1,6 +1,6 @@
 package org.kevoree.polynomial.benchmark;
 
-import org.kevoree.util.DataPoint;
+
 import org.kevoree.util.polynomial.PolynomialModel;
 
 
@@ -9,10 +9,12 @@ import org.kevoree.util.polynomial.PolynomialModel;
  */
 public class BenchmarkPolynomialTreeMap extends Benchmark {
     PolynomialModel pm;
+    public double error;
 
     @Override
     public void init() {
-        pm = new PolynomialModel(1000,1,20);
+        int degrade= (int)(points.get(1).time -points.get(0).time);
+        pm = new PolynomialModel(degrade,error,20);
     }
 
     /*public void finalinit(){

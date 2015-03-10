@@ -11,12 +11,15 @@ import java.util.ArrayList;
  */
 public class ExecutorPaper {
 
-    public static void execute(String dataset, String name, int times){
+    public static void execute(String dataset, String name, int times, double error){
 
         Benchmark[] toRun = new Benchmark[2];
 
         toRun[0] = new BenchmarkTreeMap();
-        toRun[1] = new BenchmarkPolynomialTreeMap();
+        BenchmarkPolynomialTreeMap btm= new BenchmarkPolynomialTreeMap();
+        btm.error=error;
+        toRun[1] = btm;
+
         long starttime;
         long endtime;
         double res;
@@ -26,6 +29,7 @@ public class ExecutorPaper {
         final ArrayList<DataPoint> points = DataLoaderZip.load(dataset);
         endtime = System.nanoTime();
         res = ((double) (endtime - starttime)) / (1000000000);
+        System.out.println();
         System.out.println("Loaded "+name+" :" + points.size() + " values in " + res + " s!");
 
         for (int i = 0; i < toRun.length; i++) {
@@ -53,12 +57,13 @@ public class ExecutorPaper {
 
 
     public static void main(String[] args) throws IOException {
-        int times=100;
-        execute("ds0.zip","Constant", times); //Constant database
-        execute("ds1.zip","Temperature",times); //Temperature database
-        execute("ds3.zip","Luminosity",times); //Temperature database
-        execute("ds5.zip","Electric",times); //Temperature database
-        execute("ds9.zip","Sound",times); //Temperature database
+        int times=10;
+       // execute("ds0.zip","Constant", times,1); //Constant database
+        //execute("ds1.zip","Temperature",times,1); //Temperature database
+        //execute("ds3.zip","Luminosity",times,1); //Luminosity database
+       // execute("ds5.zip","Electric",times,1); //Electric database
+        //execute("ds9.zip","Sound",times,0.01); //Sound database
+        execute("ds11.zip","Random",times,1); //Random database
 
 
 
