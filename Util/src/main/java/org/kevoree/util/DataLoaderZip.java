@@ -1,5 +1,7 @@
 package org.kevoree.util;
 
+import org.uncommons.maths.random.MersenneTwisterRNG;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -61,6 +63,20 @@ public class DataLoaderZip {
     }
 
     public static ArrayList<DataPoint> load(String filename) {
+        if(filename.equals("ds11.zip")){
+            org.uncommons.maths.random.MersenneTwisterRNG rng = new MersenneTwisterRNG();
+            ArrayList<DataPoint> results = new ArrayList<DataPoint>();
+            long t=0;
+            for (int i=0; i<12000000; i++) {
+                DataPoint dp = new DataPoint();
+                dp.time = t;
+                dp.value = rng.nextDouble()*1000;
+                t++;
+            }
+            return results;
+        }
+
+
         String csvFile = baseDir + filename;
         String line = "";
         String cvsSplitBy = ",";

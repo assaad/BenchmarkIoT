@@ -50,28 +50,40 @@ public class TempoIQTest {
 
         System.out.println(device.getName()+" has "+sensors.size()+" sensors");
         Sensor eurusd= sensors.get(1);
-        eurusd.setName("Euro Dollars");
 
-        Sensor luminosity= sensors.get(0);
-        luminosity.setName("Luminosity Sensor");
 
 
         com.tempoiq.MultiStatus ms = new MultiStatus();
         ArrayList<org.kevoree.util.DataPoint> euros = EurUsdLoader.load();
 
-        for(int i=0; i<euros.size();i++) {
-            com.tempoiq.DataPoint dataPoint = new com.tempoiq.DataPoint(new DateTime(euros.get(i).time),euros.get(i).value);
-            WriteRequest wr = new WriteRequest().add(device,eurusd,dataPoint);
+        long starttime;
+        long endtime;
+        double res;
+        int count=0;
+
+        starttime = System.nanoTime();
+        int batch=20000;
+
+        for(int i=0; i<euros.size()-batch;i+=batch) {
+
+            ArrayList<com.tempoiq.DataPoint> resAll= new ArrayList<com.tempoiq.DataPoint>();
+
+            for(int j=0;j<batch;j++){
+                com.tempoiq.DataPoint dataPoint = new com.tempoiq.DataPoint(new DateTime(euros.get(i+j).time),euros.get(i+j).value);
+                resAll.add(dataPoint);
+            }
+            WriteRequest wr = new WriteRequest().add(device,eurusd,resAll);
 
             Result<Void> writer = client.writeDataPoints(wr);
 
 
             if(writer.getState()!=State.SUCCESS){
-                System.out.println(writer.getMessage());
+                System.out.println(writer.getMessage()+"at i= "+i);
             }
-            if(i%10000==0){
-                System.out.println("Wrote "+i);
-            }
+            endtime = System.nanoTime();
+            count++;
+            res = ((double) (endtime - starttime)) / (1000000000);
+            System.out.println("Wrote "+i+" Avg per "+batch+" is: "+res/count);
 
         }
 
