@@ -114,6 +114,32 @@ public abstract class Benchmark {
         return avg;
     }
 
+    public double benchmarkContinuity( int miss){
+
+        init();
+        for (int i = 0; i < points.size(); i+=miss) {
+            put(points.get(i).time, points.get(i).value);
+        }
+
+        double res=0;
+
+            if(gcCollect) {
+                System.gc();
+            }
+
+            for (int i = 0; i < points.size(); i++) {
+                try {
+                    res += Math.abs(get(points.get(i).time) - points.get(i).value);
+                }
+                catch (Exception ex){
+                    System.out.println("i= "+i+ " time "+points.get(i).time);
+                }
+            }
+
+
+        return res/points.size();
+    }
+
 
     public abstract void init();
 

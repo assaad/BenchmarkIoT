@@ -30,7 +30,12 @@ public class BenchmarkTreeMap extends Benchmark {
 
     @Override
     public double get(long t) {
-        return treeMap.get(t);
-
+        try {
+            return treeMap.get(treeMap.floorKey(t));
+        }
+        catch (Exception ex){
+            System.out.println(t);
+        }
+return 0;
     }
 }
