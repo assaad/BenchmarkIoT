@@ -61,7 +61,7 @@ public class ExecutorPaper {
 
         for (int i = 0; i < toRun.length; i++) {
             toRun[i].setDataPoints(points);
-            System.out.println("Test Continuity " + toRun[i].getBenchmarkName() + ": " + toRun[i].benchmarkContinuity(2)+"");
+            System.out.println("Test Continuity " + toRun[i].getBenchmarkName() + ": " + toRun[i].benchmarkContinuity(100)+"");
         }
 
     }
@@ -70,6 +70,7 @@ public class ExecutorPaper {
     public static void main(String[] args) throws IOException {
         int times=10;
        // execute("ds0.zip","Constant", times,0.0001); //Constant database
+        execute("ds12.zip","Linear",times,0.0001); //Linear database
         execute("ds1.zip","Temperature",times,0.0001); //Temperature database
         execute("ds3.zip","Luminosity",times,0.0001); //Luminosity database*/
         execute("ds5.zip","Electric",times,0.0001); //Electric database

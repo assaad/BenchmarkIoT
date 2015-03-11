@@ -12,3 +12,4 @@ log/
 /gen/
 /lib/
 /password.txt
+*.rtf

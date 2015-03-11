@@ -78,6 +78,19 @@ public class DataLoaderZip {
             return results;
         }
 
+        if(filename.equals("ds12.zip")){
+            ArrayList<DataPoint> results = new ArrayList<DataPoint>();
+            long t=0;
+            for (int i=0; i<4000000; i++) {
+                DataPoint dp = new DataPoint();
+                dp.time = t;
+                dp.value = i*3;
+                results.add(dp);
+                t++;
+            }
+            return results;
+        }
+
 
         String csvFile = baseDir + filename;
         String line = "";
