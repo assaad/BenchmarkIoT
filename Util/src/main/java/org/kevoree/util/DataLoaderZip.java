@@ -68,7 +68,7 @@ public class DataLoaderZip {
             org.uncommons.maths.random.MersenneTwisterRNG rng = new MersenneTwisterRNG();
             ArrayList<DataPoint> results = new ArrayList<DataPoint>();
             long t=0;
-            for (int i=0; i<4000000; i++) {
+            for (int i=0; i<12000000; i++) {
                 DataPoint dp = new DataPoint();
                 dp.time = t;
                 dp.value = rng.nextDouble()*100;

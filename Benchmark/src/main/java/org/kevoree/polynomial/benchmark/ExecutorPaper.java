@@ -35,7 +35,7 @@ public class ExecutorPaper {
         System.out.println();
         System.out.println("Loaded "+name+" :" + points.size() + " values in " + res + " s!");
 
-     /*   for (int i = 0; i < toRun.length; i++) {
+      for (int i = 0; i < toRun.length; i++) {
             toRun[i].setGcCollect(true);
             toRun[i].setDataPoints(points);
             System.out.println("Writing on " + toRun[i].getBenchmarkName() + ": " + toRun[i].benchmarkWrite(times)+" s");
@@ -55,7 +55,7 @@ public class ExecutorPaper {
             toRun[i].setDataPoints(points);
             System.out.println("Random reading on " + toRun[i].getBenchmarkName() + ": " + toRun[i].benchmarkRandomRead(times,points.size())+" s");
         }
-*/
+
 
         System.out.println("-----------------------------------------------");
 
@@ -69,12 +69,12 @@ public class ExecutorPaper {
 
     public static void main(String[] args) throws IOException {
         int times=10;
-       // execute("ds0.zip","Constant", times,0.0001); //Constant database
-        execute("ds12.zip","Linear",times,0.0001); //Linear database
-        execute("ds1.zip","Temperature",times,0.0001); //Temperature database
-        execute("ds3.zip","Luminosity",times,0.0001); //Luminosity database*/
-        execute("ds5.zip","Electric",times,0.0001); //Electric database
-        execute("ds9.zip","Sound",times,0.0001); //Sound database
+        //execute("ds0.zip","Constant", times,0.0001); //Constant database
+        //execute("ds12.zip","Linear",times,0.0001); //Linear database
+       // execute("ds1.zip","Temperature",times,0.0001); //Temperature database
+       // execute("ds3.zip","Luminosity",times,0.0001); //Luminosity database*/
+      //  execute("ds5.zip","Electric",times,0.0001); //Electric database
+      //  execute("ds9.zip","Sound",times,0.0001); //Sound database
         execute("ds11.zip","Random",times,0.0001); //Random database
 
 
