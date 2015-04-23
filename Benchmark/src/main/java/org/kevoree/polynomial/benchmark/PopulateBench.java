@@ -11,10 +11,13 @@ import com.google.caliper.Param;
  */
 public class PopulateBench {
 
+
+
+
     @SuppressWarnings("UnusedDeclaration")
     @Benchmark
     void timeNanoTime(int reps) {
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < reps; i++) {
             System.nanoTime();
         }
     }
@@ -22,7 +25,7 @@ public class PopulateBench {
     @SuppressWarnings("UnusedDeclaration")
     @Benchmark
     void timeCurrentTimeMillis(int reps) {
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < reps; i++) {
             System.currentTimeMillis();
         }
     }
