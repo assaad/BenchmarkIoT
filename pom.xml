@@ -10,13 +10,12 @@
 
     <properties>
         <mongo.driver.version>2.13.0-rc0</mongo.driver.version>
-        <kmf.version>4.11.1-SNAPSHOT</kmf.version>
+        <kmf.version>4.18.2</kmf.version>
     </properties>
 
     <modules>
 		<module>Util</module>
         <module>Benchmark</module>
-        <module>model</module>
     </modules>
 
     <build>

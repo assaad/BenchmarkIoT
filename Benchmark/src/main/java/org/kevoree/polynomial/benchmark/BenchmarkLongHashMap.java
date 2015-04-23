@@ -1,6 +1,6 @@
 package org.kevoree.polynomial.benchmark;
 
-import org.kevoree.modeling.api.util.LongHashMap;
+import org.kevoree.modeling.api.map.LongHashMap;
 
 /**
  * Created by assaad on 03/03/15.
@@ -9,7 +9,7 @@ public class BenchmarkLongHashMap extends Benchmark {
     LongHashMap<Double> tree;
     @Override
     public void init() {
-        tree=new LongHashMap<Double>();
+        tree=new LongHashMap<Double>(100000,1);
     }
 
     @Override
