@@ -12,22 +12,36 @@ import org.kevoree.modeling.bench.SmartSystemView;
  */
 public class BenchmarkKmfDiscrete extends Benchmark {
     private SmartSystemModel system;
+    private DiscreteSensor ps;
     private long psID;
 
+
+    public void print(){
+
+        ps.timeWalker().allTimes().then(new Callback<long[]>() {
+            public void on(long[] collected2) {
+                System.out.println("Kmf discrete: "+collected2.length);
+            }
+        });
+
+    }
 
     @Override
     public void init() {
         system = new SmartSystemModel();
         system.connect();
         SmartSystemView s0=system.universe(0).time(0);
-        DiscreteSensor ps = s0.createDiscreteSensor().setName("sensor0");
+
+        ps = s0.createDiscreteSensor().setName("sensor0");
         s0.setRoot(ps);
         psID=ps.uuid();
+
+
     }
 
     @Override
     public String getBenchmarkName() {
-        return "KMF Descrete";
+        return "KMF Discrete";
     }
 
     @Override

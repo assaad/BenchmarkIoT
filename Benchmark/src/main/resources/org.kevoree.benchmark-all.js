@@ -11816,7 +11816,7 @@ var org;
                         };
                         MetaPolynomialSensor.INSTANCE = null;
                         MetaPolynomialSensor.ATT_NAME = new org.kevoree.modeling.api.abs.AbstractMetaAttribute("name", 4, 0, false, org.kevoree.modeling.api.meta.PrimitiveTypes.STRING, org.kevoree.modeling.api.extrapolation.DiscreteExtrapolation.instance());
-                        MetaPolynomialSensor.ATT_VALUE = new org.kevoree.modeling.api.abs.AbstractMetaAttribute("value", 5, 1.0E-4, false, org.kevoree.modeling.api.meta.PrimitiveTypes.DOUBLE, org.kevoree.modeling.api.extrapolation.PolynomialExtrapolation.instance());
+                        MetaPolynomialSensor.ATT_VALUE = new org.kevoree.modeling.api.abs.AbstractMetaAttribute("value", 5, 0.01, false, org.kevoree.modeling.api.meta.PrimitiveTypes.DOUBLE, org.kevoree.modeling.api.extrapolation.PolynomialExtrapolation.instance());
                         return MetaPolynomialSensor;
                     })(org.kevoree.modeling.api.abs.AbstractMetaClass);
                     meta.MetaPolynomialSensor = MetaPolynomialSensor;

@@ -10,16 +10,26 @@ import org.kevoree.modeling.bench.*;
  */
 public class BenchmarkKmfPolynomial extends Benchmark {
     private SmartSystemModel system;
-
+ private PolynomialSensor ps;
     private long psID;
 
+
+    public void print(){
+
+        ps.timeWalker().allTimes().then(new Callback<long[]>() {
+            public void on(long[] collected2) {
+                System.out.println("Kmf polynomial: "+collected2.length);
+            }
+        });
+
+    }
 
     @Override
     public void init() {
         system = new SmartSystemModel();
         system.connect();
         SmartSystemView s0=system.universe(0).time(0);
-        PolynomialSensor ps = s0.createPolynomialSensor().setName("sensor0");
+        ps = s0.createPolynomialSensor().setName("sensor0");
         s0.setRoot(ps);
         psID=ps.uuid();
     }

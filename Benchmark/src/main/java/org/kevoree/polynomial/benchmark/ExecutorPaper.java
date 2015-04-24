@@ -40,7 +40,11 @@ public class ExecutorPaper {
 
         Collections.sort(p);
 
-        final ArrayList<DataPoint> points=new ArrayList<DataPoint>(size);
+
+        ArrayList<DataPoint> points=new ArrayList<DataPoint>(size);
+
+
+
         for(int i=0;i<size;i++){
             DataPoint dp= new DataPoint();
             dp.time=i;

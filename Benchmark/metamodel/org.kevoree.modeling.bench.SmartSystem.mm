@@ -13,7 +13,7 @@ class org.kevoree.modeling.bench.DiscreteSensor : org.kevoree.modeling.bench.Sen
 }
 
 class org.kevoree.modeling.bench.PolynomialSensor : org.kevoree.modeling.bench.Sensor {
-    @precision(0.0001)
+    @precision(0.01)
     value : Double
 }
 

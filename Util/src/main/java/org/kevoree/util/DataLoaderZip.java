@@ -91,6 +91,19 @@ public class DataLoaderZip {
             return results;
         }
 
+        if(filename.equals("ds0.zip")){
+            ArrayList<DataPoint> results = new ArrayList<DataPoint>();
+            long t=0;
+            for (int i=0; i<10000000; i++) {
+                DataPoint dp = new DataPoint();
+                dp.time = t;
+                dp.value = 42;
+                results.add(dp);
+                t++;
+            }
+            return results;
+        }
+
 
         String csvFile = baseDir + filename;
         String line = "";

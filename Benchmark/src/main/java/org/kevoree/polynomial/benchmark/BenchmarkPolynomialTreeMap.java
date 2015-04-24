@@ -11,6 +11,11 @@ public class BenchmarkPolynomialTreeMap extends Benchmark {
     PolynomialModel pm;
     public double error;
 
+
+    public void print(){
+        pm.displayStatistics(true);
+    }
+
     @Override
     public void init() {
         int degrade= (int)(points.get(1).time -points.get(0).time);
