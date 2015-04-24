@@ -15,12 +15,15 @@ public class ExecutorPaper {
 
     public static void execute(String dataset, String name, int times, int size, double error){
 
-        Benchmark[] toRun = new Benchmark[2];
+        Benchmark[] toRun = new Benchmark[4];
 
         toRun[0] = new BenchmarkTreeMap();
         BenchmarkPolynomialTreeMap btm= new BenchmarkPolynomialTreeMap();
         btm.error=error;
         toRun[1] = btm;
+
+        toRun[2] = new BenchmarkKmfPolynomial();
+        toRun[3] = new BenchmarkKmfDiscrete();
 
         long starttime;
         long endtime;
@@ -47,16 +50,16 @@ public class ExecutorPaper {
 
 
 
-  /*    for (int i = 0; i < toRun.length; i++) {
+      for (int i = 0; i < toRun.length; i++) {
             toRun[i].setGcCollect(true);
             toRun[i].setDataPoints(points);
             System.out.println("Writing on " + toRun[i].getBenchmarkName() + ": " + toRun[i].benchmarkWrite(times)+" s");
-        }*/
+        }
 
 
        System.out.println("-----------------------------------------------");
 
-      /*  for (int i = 0; i < toRun.length; i++) {
+        for (int i = 0; i < toRun.length; i++) {
             toRun[i].setDataPoints(points);
             System.out.println("Sequential reading on " + toRun[i].getBenchmarkName() + ": " + toRun[i].benchmarkSequencialRead(times, points.size())+" s");
         }
@@ -66,7 +69,7 @@ public class ExecutorPaper {
         for (int i = 0; i < toRun.length; i++) {
             toRun[i].setDataPoints(points);
             System.out.println("Random reading on " + toRun[i].getBenchmarkName() + ": " + toRun[i].benchmarkRandomRead(times,points.size())+" s");
-        }*/
+        }
 
 
        System.out.println("-----------------------------------------------");
@@ -80,25 +83,19 @@ public class ExecutorPaper {
 
 
     public static void main(String[] args) throws IOException {
-        int times=3;
-        int point=10000000;
-/*
-        Constant & c=42 \\
-        Temperature & DHT11 (0~50'C +/- 2'C) \\
-        Luminosity & SEN-09088 (10 lux précision)  \\
-        Electricity & Creos 200 smart meters \\
-        Sound sensor & music file \\
-        Random & Mersenne Twister RNG \\ \hline
-        \end{tabular}
-        */
+        int times=10;
+        int point=1000000;
+
 
         execute("ds0.zip","Constant", times,point,0.0001); //Constant database
-        execute("ds12.zip","Linear",times,point,0.0001); //Linear database
-        execute("ds1.zip","Temperature",times,point,0.0001); //Temperature database
-        execute("ds3.zip","Luminosity",times,point,0.0001); //Luminosity database*/
-        execute("ds5.zip","Electric",times,point,0.0001); //Electric database
-        execute("ds9.zip","Sound",times,point,0.0001); //Sound database
-        execute("ds11.zip","Random",times,point,0.0001); //Random database
+
+
+     /*   execute("ds12.zip","Linear",times,point,0.0001);
+        execute("ds1.zip","Temperature",times,point,0.0001);
+        execute("ds3.zip","Luminosity",times,point,0.0001);
+        execute("ds5.zip","Electric",times,point,0.0001);
+        execute("ds9.zip","Sound",times,point,0.0001);
+        execute("ds11.zip","Random",times,point,0.0001); */
 
 
 
