@@ -61,7 +61,7 @@ public class ExecutorPaper {
         }
 
 
-       System.out.println("-----------------------------------------------");
+      System.out.println("-----------------------------------------------");
 
         for (int i = 0; i < toRun.length; i++) {
             toRun[i].setDataPoints(points);
@@ -87,8 +87,8 @@ public class ExecutorPaper {
 
 
     public static void main(String[] args) throws IOException {
-        int times=10;
-        int point=1000000;
+        int times=5;
+        int point=5000000;
 
 
         execute("ds0.zip","Constant", times,point,0.0001); //Constant database
