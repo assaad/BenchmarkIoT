@@ -37,6 +37,11 @@ public class BenchmarkPolynomialTreeMap extends Benchmark {
     }
 
     @Override
+    public void finalput() {
+
+    }
+
+    @Override
     public double get(long t) {
         return pm.fastReconstruct(t);
     }

@@ -27,4 +27,9 @@ public class BenchmarkJavaHashmap extends Benchmark {
     public double get(long t) {
         return tree.get(t);
     }
+
+    @Override
+    public void finalput() {
+
+    }
 }

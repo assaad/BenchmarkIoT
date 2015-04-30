@@ -21,6 +21,9 @@ public abstract class Benchmark {
         this.points = points;
     }
 
+
+    public abstract void finalput();
+
     public double benchmarkWrite(int iterations){
 
         long starttime;
@@ -40,6 +43,7 @@ public abstract class Benchmark {
             for (int i = 0; i < points.size(); i++) {
                 put(points.get(i).time, points.get(i).value);
             }
+            finalput();
             endtime = System.nanoTime();
             res = ((double) (endtime - starttime)) / (1000000000);
             avg += res;

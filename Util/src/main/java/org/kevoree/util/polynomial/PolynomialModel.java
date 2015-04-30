@@ -5,6 +5,7 @@ package org.kevoree.util.polynomial;
 import org.kevoree.util.DataPoint;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.TreeMap;
 
 public class PolynomialModel {
@@ -134,5 +135,20 @@ public class PolynomialModel {
         return ec;
     }
 
+    public Object[] getlistOfTime() {
+       return polynomTree.keySet().toArray();
+    }
+
+    public String[] getPolynomials() {
+        String[] res = new String[polynomTree.size()];
+
+        int counter=0;
+        for(Map.Entry<Long,Polynomial> entry : polynomTree.entrySet()) {
+            Polynomial value = entry.getValue();
+            res[counter]=value.save();
+            counter++;
+        }
+        return res;
+    }
 }
 

@@ -27,6 +27,10 @@ public class BenchmarkRbTree extends Benchmark {
         treetest.insert(t);
 
     }
+    @Override
+    public void finalput() {
+
+    }
 
     @Override
     public double get(long t) {

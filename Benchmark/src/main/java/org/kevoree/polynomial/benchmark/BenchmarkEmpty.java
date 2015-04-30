@@ -11,6 +11,11 @@ import java.util.Random;
 public class BenchmarkEmpty extends Benchmark {
 
     @Override
+    public void finalput() {
+
+    }
+
+    @Override
     public void init() {
 
     }

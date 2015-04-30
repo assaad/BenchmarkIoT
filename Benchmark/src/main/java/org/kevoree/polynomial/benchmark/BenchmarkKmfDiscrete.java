@@ -60,6 +60,11 @@ public class BenchmarkKmfDiscrete extends Benchmark {
     }
 
     @Override
+    public void finalput() {
+
+    }
+
+    @Override
     public double get(long t) {
 
         final long tt=t;

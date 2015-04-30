@@ -1,8 +1,6 @@
 package org.kevoree.polynomial.benchmark;
 
-import org.kevoree.util.DataPoint;
 
-import java.util.Random;
 import java.util.TreeMap;
 
 /**
@@ -10,11 +8,11 @@ import java.util.TreeMap;
  */
 public class BenchmarkTreeMap extends Benchmark {
 
-    private TreeMap<Long, Double> treeMap;
+    private TreeMap<Long, DPoint> treeMap;
 
     @Override
     public void init() {
-        treeMap=new TreeMap<Long, Double>();
+        treeMap=new TreeMap<Long, DPoint>();
     }
 
     @Override
@@ -24,14 +22,21 @@ public class BenchmarkTreeMap extends Benchmark {
 
     @Override
     public void put(long t, double value) {
-        treeMap.put(t,value);
+        DPoint dp = new DPoint();
+        dp.value=value;
+        treeMap.put(t,dp);
+    }
+
+    @Override
+    public void finalput() {
 
     }
 
     @Override
     public double get(long t) {
         try {
-            return treeMap.get(treeMap.floorKey(t));
+
+            return treeMap.get(treeMap.floorKey(t)).value;
         }
         catch (Exception ex){
             System.out.println(t);

@@ -15,15 +15,19 @@ public class ExecutorPaper {
 
     public static void execute(String dataset, String name, int times, int size, double error){
 
-        Benchmark[] toRun = new Benchmark[4];
+        Benchmark[] toRun = new Benchmark[2];
 
-        toRun[0] = new BenchmarkTreeMap();
+        toRun[0] = new BenchmarkMongoDb();
+        toRun[1] = new BenchmarkMongoDbPolynomial();
+
+       /* toRun[0] = new BenchmarkTreeMap();
         BenchmarkPolynomialTreeMap btm= new BenchmarkPolynomialTreeMap();
         btm.error=error;
-        toRun[1] = btm;
+        toRun[1] = btm;*/
 
-        toRun[2] = new BenchmarkKmfPolynomial();
-        toRun[3] = new BenchmarkKmfDiscrete();
+        //toRun[2] = new BenchmarkKmfPolynomial();
+      //  toRun[0] = new BenchmarkKmfDiscrete();
+        //toRun[1] = new BenchmarkKmfPolynomial();
 
         long starttime;
         long endtime;
@@ -61,7 +65,7 @@ public class ExecutorPaper {
         }
 
 
-      System.out.println("-----------------------------------------------");
+  /*    System.out.println("-----------------------------------------------");
 
         for (int i = 0; i < toRun.length; i++) {
             toRun[i].setDataPoints(points);
@@ -81,25 +85,25 @@ public class ExecutorPaper {
         for (int i = 0; i < toRun.length; i++) {
             toRun[i].setDataPoints(points);
             System.out.println("Test Continuity " + toRun[i].getBenchmarkName() + ": " + toRun[i].benchmarkContinuity(10)+"");
-        }
+        }*/
 
     }
 
 
     public static void main(String[] args) throws IOException {
-        int times=5;
+        int times=1;
         int point=5000000;
 
 
         execute("ds0.zip","Constant", times,point,0.0001); //Constant database
 
 
-     /*   execute("ds12.zip","Linear",times,point,0.0001);
+        execute("ds12.zip","Linear",times,point,0.0001);
         execute("ds1.zip","Temperature",times,point,0.0001);
         execute("ds3.zip","Luminosity",times,point,0.0001);
         execute("ds5.zip","Electric",times,point,0.0001);
         execute("ds9.zip","Sound",times,point,0.0001);
-        execute("ds11.zip","Random",times,point,0.0001); */
+        execute("ds11.zip","Random",times,point,0.0001);
 
 
 

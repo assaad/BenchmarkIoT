@@ -11,6 +11,11 @@ public class BenchmarkLongRbTree extends Benchmark {
     LongRBTree treetest;
 
     @Override
+    public void finalput() {
+
+    }
+
+    @Override
     public void init() {
         treetest = new LongRBTree();
     }

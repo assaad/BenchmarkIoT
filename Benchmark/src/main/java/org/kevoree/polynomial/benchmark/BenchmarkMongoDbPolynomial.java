@@ -2,28 +2,27 @@ package org.kevoree.polynomial.benchmark;
 
 
 import org.kevoree.util.dbdrivers.MongoDbDataBase;
+import org.kevoree.util.polynomial.PolynomialModel;
 
 
 /**
  * Created by assaa_000 on 25/11/2014.
  */
-public class BenchmarkMongoDb extends Benchmark {
+public class BenchmarkMongoDbPolynomial extends Benchmark {
     MongoDbDataBase mdb;
-    private long[] arrayt;
-    private double[] arrayv;
-    int size=10000;
-    int counter=0;
+    PolynomialModel pm;
+    public double error;
 
-    @Override
-    public void finalput() {
 
+    public void print(){
+        pm.displayStatistics(true);
     }
 
     @Override
     public void init() {
+        int degrade= (int)(points.get(1).time -points.get(0).time);
+        pm = new PolynomialModel(degrade,error,5);
         try{
-            arrayt=new long[size];
-            arrayv=new double[size];
             mdb = new MongoDbDataBase("localhost", 27017, "mydb");
             mdb.clean();
         } catch (Exception ex) {
@@ -31,27 +30,26 @@ public class BenchmarkMongoDb extends Benchmark {
         }
     }
 
+    /*public void finalinit(){
+        pm.finalSave();
+    }*/
 
     @Override
     public String getBenchmarkName() {
-        return "Mongo Db";
+        return "Polynomial Mongo Db";
     }
+
+
 
     @Override
     public void put(long t, double value) {
+        pm.feed(t,value);
+    }
 
-       /* String[] payloads = new String[2];
-        payloads[0] = String.valueOf(t);
-        payloads[1] = String.valueOf(value);
-        mdb.put(payloads);*/
+    @Override
+    public void finalput() {
+        mdb.Arrayput(pm.getlistOfTime(), pm.getPolynomials());
 
-       arrayt[counter]=t;
-        arrayv[counter]=value;
-        counter++;
-        if(counter==size){
-            mdb.Arrayput(arrayt,arrayv);
-            counter=0;
-        }
     }
 
 

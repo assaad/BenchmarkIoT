@@ -14,6 +14,9 @@ public class MongoDbDataBase {
     public MongoDbDataBase(String host, Integer port, String dbName) throws UnknownHostException {
         mongoClient = new MongoClient(host, port);
         db = mongoClient.getDB(dbName);
+        if(db==null){
+            System.out.println("null db");
+        }
     }
 
     private static final String KMF_COL = "kmfall";
@@ -53,12 +56,38 @@ public class MongoDbDataBase {
         return result;
     }
 
+
+    public void Arrayput(long[] t, double[] values){
+        DBCollection table = db.getCollection(KMF_COL);
+        BasicDBObject [] objs = new BasicDBObject[t.length];
+
+        for(int i=0; i<t.length;i++){
+            objs[i] = new BasicDBObject();
+            objs[i].put(KMF_KEY, String.valueOf(t[i]));
+            objs[i].put(KMF_VAL, String.valueOf(values[i]));
+        }
+        table.insert(objs);
+    }
+
+    public void Arrayput(Object[] t, String[] payloads){
+        DBCollection table = db.getCollection(KMF_COL);
+        BasicDBObject [] objs = new BasicDBObject[t.length];
+
+        for(int i=0; i<t.length;i++){
+            objs[i] = new BasicDBObject();
+          //  System.out.println("key ex: " + t[i].toString());
+           // System.out.println("poly ex: " + payloads[i]);
+            objs[i].put(KMF_KEY, t[i].toString());
+            objs[i].put(KMF_VAL, payloads[i]);
+        }
+        table.insert(objs);
+    }
+
     public void put(String[] payloads) {
         DBCollection table = db.getCollection(KMF_COL);
          BasicDBObject obj = new BasicDBObject();
             obj.put(KMF_KEY, payloads[0]);
             obj.put(KMF_VAL, payloads[1]);
-
        table.insert(obj);
     }
 
