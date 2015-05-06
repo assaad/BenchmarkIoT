@@ -6,6 +6,7 @@ import org.kevoree.modeling.api.KObject;
 import org.kevoree.modeling.bench.DiscreteSensor;
 import org.kevoree.modeling.bench.SmartSystemModel;
 import org.kevoree.modeling.bench.SmartSystemView;
+import org.kevoree.modeling.drivers.leveldb.LevelDbContentDeliveryDriver;
 
 /**
  * Created by assaa_000 on 25/11/2014.
@@ -15,27 +16,41 @@ public class BenchmarkKmfDiscrete extends Benchmark {
     private DiscreteSensor ps;
     private long psID;
 
+    private DiskCounter dc;
 
     public void print(){
 
-        ps.timeWalker().allTimes().then(new Callback<long[]>() {
+      /*  ps.timeWalker().allTimes().then(new Callback<long[]>() {
             public void on(long[] collected2) {
                 System.out.println("Kmf discrete: "+collected2.length);
             }
-        });
+        });*/
+        System.out.println("size: "+dc.counter);
 
     }
 
     @Override
     public void init() {
-        system = new SmartSystemModel();
-        system.connect();
-        SmartSystemView s0=system.universe(0).time(0);
+        try {
 
-        ps = s0.createDiscreteSensor().setName("sensor0");
-        s0.setRoot(ps);
-        psID=ps.uuid();
+            system = new SmartSystemModel();
 
+         //   system.manager().setContentDeliveryDriver(new LevelDbContentDeliveryDriver("/Users/assaad/work/github/BenchmarkIoT/testid/"));
+            dc=new DiskCounter();
+            system.manager().setContentDeliveryDriver(dc);
+            system.connect().then(new Callback<Throwable>() {
+                public void on(Throwable throwable) {
+                    SmartSystemView s0 = system.universe(0).time(0);
+                    ps = s0.createDiscreteSensor().setName("sensor0");
+                    s0.setRoot(ps);
+                    psID = ps.uuid();
+                }
+            });
+
+        }
+        catch(Exception ex){
+
+        }
 
     }
 
@@ -61,6 +76,16 @@ public class BenchmarkKmfDiscrete extends Benchmark {
 
     @Override
     public void finalput() {
+        system.save().then(new Callback<Throwable>() {
+            public void on(Throwable throwable) {
+
+            }
+        });
+
+    }
+    @Override
+    public void firstget() {
+
 
     }
 

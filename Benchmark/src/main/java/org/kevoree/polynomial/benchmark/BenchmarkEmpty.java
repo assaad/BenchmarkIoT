@@ -16,6 +16,16 @@ public class BenchmarkEmpty extends Benchmark {
     }
 
     @Override
+    public void print() {
+
+    }
+
+    @Override
+    public void firstget() {
+
+    }
+
+    @Override
     public void init() {
 
     }

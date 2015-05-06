@@ -18,6 +18,16 @@ public class BenchmarkLongHashMap extends Benchmark {
     }
 
     @Override
+    public void print() {
+
+    }
+
+    @Override
+    public void firstget() {
+
+    }
+
+    @Override
     public String getBenchmarkName() {
         return "Kevoree Long Hashmap";
     }

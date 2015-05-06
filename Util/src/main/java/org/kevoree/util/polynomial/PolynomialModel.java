@@ -25,6 +25,8 @@ public class PolynomialModel {
         this.maxDegree = maxDegree;
     }
 
+
+
     public void feed(long time, double value) {
         if (defaultPolynomialExtrapolation == null) {
             defaultPolynomialExtrapolation = new Polynomial(time, toleratedError, maxDegree, degradeFactor, prioritization);
@@ -73,6 +75,16 @@ public class PolynomialModel {
         }
         return fast.extrapolate(time);
     }
+
+
+    public int getAll(){
+        int total=0;
+        for (Long t : polynomTree.keySet()) {
+            total+=polynomTree.get(t).getSamples().size();
+        }
+        return total;
+    }
+
 
     public StatClass displayStatistics(boolean display) {
         StatClass global = new StatClass();
@@ -149,6 +161,17 @@ public class PolynomialModel {
             counter++;
         }
         return res;
+    }
+
+    public void load(Object[] times, String[] polynoms){
+        polynomTree = new TreeMap<Long, Polynomial>();
+        for(int i=0;i<times.length;i++){
+            Long t= Long.parseLong(times[i].toString());
+            Polynomial poly = new Polynomial(t, toleratedError, maxDegree, degradeFactor, prioritization);
+            poly.load(polynoms[i]);
+            polynomTree.put(t,poly);
+        }
+
     }
 }
 

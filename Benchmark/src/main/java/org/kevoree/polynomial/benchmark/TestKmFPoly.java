@@ -11,20 +11,18 @@ import org.kevoree.util.DataLoaderZip;
 import org.kevoree.util.DataPoint;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Created by assaad on 24/04/15.
  */
-public class TestKmF {
+public class TestKmFPoly {
 
     private static SmartSystemModel system;
-    private static DiscreteSensor ps;
+    private static PolynomialSensor ps;
     private static long psID;
 
 
     public static void main(String[] arg){
-
         long starttime;
         long endtime;
         double res;
@@ -33,7 +31,7 @@ public class TestKmF {
 
         String dataset;
 
-        dataset = "ds0.zip"; //constant
+        dataset = "ds1.zip"; //constant
        /* dataset = "ds12.zip"; //linear
         dataset = "ds1.zip"; //temp
         dataset = "ds3.zip"; //lum
@@ -66,7 +64,7 @@ public class TestKmF {
             system.connect().then(new Callback<Throwable>() {
                 public void on(Throwable throwable) {
                     SmartSystemView s0 = system.universe(0).time(0);
-                    ps = s0.createDiscreteSensor().setName("sensor0");
+                    ps = s0.createPolynomialSensor().setName("sensor0");
                     s0.setRoot(ps);
                     psID = ps.uuid();
                 }
@@ -78,21 +76,13 @@ public class TestKmF {
 
         final long starttime2 = System.nanoTime();
         for(int i=0;i<size;i++){
-            if(i%50000==0){
-                System.out.println(i);
-            }
 
             final long tt=points.get(i).time;
             final double vv=points.get(i).value;
             system.universe(0).time(tt).lookup(psID).then(new Callback<KObject>(){
                 public void on(KObject kObject) {
-                    DiscreteSensor casted = (DiscreteSensor) kObject;
+                    PolynomialSensor casted = (PolynomialSensor) kObject;
                     casted.setValue(vv);
-                }
-            });
-            system.save().then(new Callback<Throwable>() {
-                public void on(Throwable throwable) {
-
                 }
             });
         }
@@ -110,26 +100,24 @@ public class TestKmF {
 
 
         starttime = System.nanoTime();
-        Random rand = new Random();
         for(int i=0;i<size;i++){
 
             if(i%50000==0){
                 System.out.println(i);
             }
-          //  final long tt=points.get(rand.nextInt(size)).time;
             final long tt=points.get(i).time;
             final double[] value = new double[1];
 
             system.universe(0).time(tt).lookup(psID).then(new Callback<KObject>(){
                 public void on(KObject kObject) {
-                    DiscreteSensor casted = (DiscreteSensor) kObject;
+                    PolynomialSensor casted = (PolynomialSensor) kObject;
                     value[0] = casted.getValue();
                 }
             });
         }
         endtime = System.nanoTime();
         res = ((double) (endtime - starttime)) / (1000000000);
-        System.out.println("Read: " + res + " s");
+        System.out.println("Read: "+res+" s");
 
 
 

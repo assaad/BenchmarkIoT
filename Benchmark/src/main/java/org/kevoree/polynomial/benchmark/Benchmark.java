@@ -52,6 +52,9 @@ public abstract class Benchmark {
         return avg;
     }
 
+    public abstract void print();
+    public abstract void firstget();
+
     public double benchmarkRandomRead(int iterations, int value) {
         long starttime;
         long endtime;
@@ -106,6 +109,7 @@ public abstract class Benchmark {
             if(gcCollect) {
                 System.gc();
             }
+            firstget();
             starttime = System.nanoTime();
             for (int i = 0; i < value; i++) {
                 get(points.get(i).time);

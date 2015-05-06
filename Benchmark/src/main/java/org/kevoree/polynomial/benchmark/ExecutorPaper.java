@@ -17,17 +17,21 @@ public class ExecutorPaper {
 
         Benchmark[] toRun = new Benchmark[2];
 
-        toRun[0] = new BenchmarkMongoDb();
-        toRun[1] = new BenchmarkMongoDbPolynomial();
+        //toRun[0] = new BenchmarkMongoDb();
+       // toRun[1] = new BenchmarkMongoDbPolynomial();
 
        /* toRun[0] = new BenchmarkTreeMap();
         BenchmarkPolynomialTreeMap btm= new BenchmarkPolynomialTreeMap();
         btm.error=error;
         toRun[1] = btm;*/
-
         //toRun[2] = new BenchmarkKmfPolynomial();
-      //  toRun[0] = new BenchmarkKmfDiscrete();
-        //toRun[1] = new BenchmarkKmfPolynomial();
+
+        toRun[0] = new BenchmarkKmfDiscrete();
+        toRun[1] = new BenchmarkKmfPolynomial();
+
+        /*BenchmarkPolynomialTreeMap ppp= new BenchmarkPolynomialTreeMap();
+        toRun[0] =ppp;
+        ppp.setError(error);*/
 
         long starttime;
         long endtime;
@@ -56,16 +60,20 @@ public class ExecutorPaper {
             points.add(dp);
         }
 
+       // System.out.println(points.size());
 
 
       for (int i = 0; i < toRun.length; i++) {
             toRun[i].setGcCollect(true);
             toRun[i].setDataPoints(points);
             System.out.println("Writing on " + toRun[i].getBenchmarkName() + ": " + toRun[i].benchmarkWrite(times)+" s");
+          toRun[i].print();
         }
 
 
-  /*    System.out.println("-----------------------------------------------");
+
+
+   /*   System.out.println("-----------------------------------------------");
 
         for (int i = 0; i < toRun.length; i++) {
             toRun[i].setDataPoints(points);
@@ -77,10 +85,10 @@ public class ExecutorPaper {
         for (int i = 0; i < toRun.length; i++) {
             toRun[i].setDataPoints(points);
             System.out.println("Random reading on " + toRun[i].getBenchmarkName() + ": " + toRun[i].benchmarkRandomRead(times,points.size())+" s");
-        }
+        }*/
 
 
-       System.out.println("-----------------------------------------------");
+   /*    System.out.println("-----------------------------------------------");
 
         for (int i = 0; i < toRun.length; i++) {
             toRun[i].setDataPoints(points);
@@ -95,15 +103,13 @@ public class ExecutorPaper {
         int point=5000000;
 
 
-        execute("ds0.zip","Constant", times,point,0.0001); //Constant database
-
-
-        execute("ds12.zip","Linear",times,point,0.0001);
-        execute("ds1.zip","Temperature",times,point,0.0001);
-        execute("ds3.zip","Luminosity",times,point,0.0001);
-        execute("ds5.zip","Electric",times,point,0.0001);
+        execute("ds0.zip","Constant", times,point,1); //Constant database
+        execute("ds12.zip","Linear",times,point,1);
+        execute("ds1.zip","Temperature",times,point,0.1);
+        execute("ds3.zip","Luminosity",times,point,0.1);
+        execute("ds5.zip","Electric",times,point,1);
         execute("ds9.zip","Sound",times,point,0.0001);
-        execute("ds11.zip","Random",times,point,0.0001);
+        execute("ds11.zip","Random",times,point,1);
 
 
 

@@ -53,9 +53,21 @@ public class BenchmarkMongoDbPolynomial extends Benchmark {
     }
 
 
+    @Override
+    public void firstget(){
+        int degrade= (int)(points.get(1).time -points.get(0).time);
+        PolynomialModel pmnew = new PolynomialModel(degrade,error,5);
+        Object[] times =pm.getlistOfTime();
+        String[] polys = new String[times.length];
+        for(int i=0;i<times.length;i++){
+            polys[i]= mdb.get(times[i].toString());
+        }
+        pmnew.load(times,polys);
+        pm=pmnew;
+    }
 
     @Override
     public double get(long t) {
-        return Double.valueOf(mdb.get(String.valueOf(t)));
+        return pm.fastReconstruct(t);
     }
 }

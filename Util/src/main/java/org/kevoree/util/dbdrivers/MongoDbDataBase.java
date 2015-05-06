@@ -49,11 +49,17 @@ public class MongoDbDataBase {
         DBCollection table = db.getCollection(KMF_COL);
         BasicDBObject searchQuery = new BasicDBObject();
         searchQuery.put(KMF_KEY, key);
+
+
         DBCursor cursor = table.find(searchQuery);
         if (cursor.count() == 1) {
                 result = cursor.next().toString();
             }
-        return result;
+
+        String[] tr = result.split(KMF_VAL); //{ "_id" : { "$oid" : "55422d19d4c6452fc5b47bc2"} , "@key" : "0" , "@val" : "42.0"}
+        tr= tr[1].split(":");
+        tr[1]= tr[1].substring(0, tr[1].indexOf('}')).replace("\"","");
+        return tr[1];
     }
 
 

@@ -33,6 +33,16 @@ public class BenchmarkRbTree extends Benchmark {
     }
 
     @Override
+    public void print() {
+
+    }
+
+    @Override
+    public void firstget() {
+
+    }
+
+    @Override
     public double get(long t) {
         treetest.previousOrEqual(t);
         return 0;

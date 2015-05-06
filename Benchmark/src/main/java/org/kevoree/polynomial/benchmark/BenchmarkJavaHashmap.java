@@ -22,6 +22,10 @@ public class BenchmarkJavaHashmap extends Benchmark {
         tree.put(t,value);
 
     }
+    @Override
+    public void firstget() {
+
+    }
 
     @Override
     public double get(long t) {
@@ -30,6 +34,11 @@ public class BenchmarkJavaHashmap extends Benchmark {
 
     @Override
     public void finalput() {
+
+    }
+
+    @Override
+    public void print() {
 
     }
 }

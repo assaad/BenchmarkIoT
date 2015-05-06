@@ -20,6 +20,11 @@ public class BenchmarkMongoDb extends Benchmark {
     }
 
     @Override
+    public void print() {
+
+    }
+
+    @Override
     public void init() {
         try{
             arrayt=new long[size];
@@ -54,10 +59,17 @@ public class BenchmarkMongoDb extends Benchmark {
         }
     }
 
+    @Override
+    public void firstget() {
+
+    }
 
 
     @Override
     public double get(long t) {
-        return Double.valueOf(mdb.get(String.valueOf(t)));
+        String s= mdb.get(String.valueOf(t));  //{ "_id" : { "$oid" : "55422d19d4c6452fc5b47bc2"} , "@key" : "0" , "@val" : "42.0"}
+
+       // System.out.print(s);
+        return Double.valueOf(s);
     }
 }
