@@ -15,7 +15,7 @@ public class ExecutorPaper {
 
     public static void execute(String dataset, String name, int times, int size, double error){
 
-        Benchmark[] toRun = new Benchmark[2];
+        Benchmark[] toRun = new Benchmark[4];
 
         //toRun[0] = new BenchmarkMongoDb();
        // toRun[1] = new BenchmarkMongoDbPolynomial();
@@ -24,10 +24,13 @@ public class ExecutorPaper {
         BenchmarkPolynomialTreeMap btm= new BenchmarkPolynomialTreeMap();
         btm.error=error;
         toRun[1] = btm;*/
-        //toRun[2] = new BenchmarkKmfPolynomial();
+        toRun[0] = new BenchmarkTreeMap();
+        toRun[1] = new BenchmarkPolynomialTreeMap();
+        toRun[2] = new BenchmarkKmfDiscrete();
+        toRun[3] = new BenchmarkKmfPolynomial();
 
-        toRun[0] = new BenchmarkKmfDiscrete();
-        toRun[1] = new BenchmarkKmfPolynomial();
+
+       // toRun[1] = new BenchmarkKmfPolynomial();
 
         /*BenchmarkPolynomialTreeMap ppp= new BenchmarkPolynomialTreeMap();
         toRun[0] =ppp;
@@ -73,7 +76,7 @@ public class ExecutorPaper {
 
 
 
-   /*   System.out.println("-----------------------------------------------");
+      System.out.println("-----------------------------------------------");
 
         for (int i = 0; i < toRun.length; i++) {
             toRun[i].setDataPoints(points);
@@ -85,21 +88,20 @@ public class ExecutorPaper {
         for (int i = 0; i < toRun.length; i++) {
             toRun[i].setDataPoints(points);
             System.out.println("Random reading on " + toRun[i].getBenchmarkName() + ": " + toRun[i].benchmarkRandomRead(times,points.size())+" s");
-        }*/
+        }
 
 
-   /*    System.out.println("-----------------------------------------------");
+        System.out.println("-----------------------------------------------");
 
         for (int i = 0; i < toRun.length; i++) {
             toRun[i].setDataPoints(points);
-            System.out.println("Test Continuity " + toRun[i].getBenchmarkName() + ": " + toRun[i].benchmarkContinuity(10)+"");
-        }*/
+        }
 
     }
 
 
     public static void main(String[] args) throws IOException {
-        int times=1;
+        int times=2;
         int point=5000000;
 
 
@@ -107,9 +109,9 @@ public class ExecutorPaper {
         execute("ds12.zip","Linear",times,point,1);
         execute("ds1.zip","Temperature",times,point,0.1);
         execute("ds3.zip","Luminosity",times,point,0.1);
-        execute("ds5.zip","Electric",times,point,1);
+       /* execute("ds5.zip","Electric",times,point,1);
         execute("ds9.zip","Sound",times,point,0.0001);
-        execute("ds11.zip","Random",times,point,1);
+        execute("ds11.zip","Random",times,point,1);*/
 
 
 

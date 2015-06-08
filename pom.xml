@@ -10,7 +10,7 @@
 
     <properties>
         <mongo.driver.version>2.13.0-rc0</mongo.driver.version>
-        <kmf.version>4.18.4-SNAPSHOT</kmf.version>
+        <kmf.version>4.18.5-SNAPSHOT</kmf.version>
     </properties>
 
     <modules>

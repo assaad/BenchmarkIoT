@@ -28,6 +28,8 @@
             <version>${kmf.version}</version>
         </dependency>
 
+
+
         <dependency>
             <groupId>org.influxdb</groupId>
             <artifactId>influxdb-java</artifactId>
@@ -51,7 +53,7 @@
             <plugin>
                 <groupId>org.kevoree.modeling</groupId>
                 <artifactId>org.kevoree.modeling.generator.mavenplugin</artifactId>
-                <version>4.18.4-SNAPSHOT</version>
+                <version>4.18.5-SNAPSHOT</version>
                 <executions>
                     <execution>
                         <goals>

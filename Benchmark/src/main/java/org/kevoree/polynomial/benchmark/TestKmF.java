@@ -1,7 +1,7 @@
 package org.kevoree.polynomial.benchmark;
 
-import org.kevoree.modeling.api.Callback;
-import org.kevoree.modeling.api.KObject;
+import org.kevoree.modeling.KCallback;
+import org.kevoree.modeling.KObject;
 import org.kevoree.modeling.bench.DiscreteSensor;
 import org.kevoree.modeling.bench.PolynomialSensor;
 import org.kevoree.modeling.bench.SmartSystemModel;
@@ -63,11 +63,11 @@ public class TestKmF {
 
         try {
             system.manager().setContentDeliveryDriver(new LevelDbContentDeliveryDriver("/Users/assaad/work/github/BenchmarkIoT/testid/discrete/"));
-            system.connect().then(new Callback<Throwable>() {
+            system.connect(new KCallback<Throwable>() {
                 public void on(Throwable throwable) {
                     SmartSystemView s0 = system.universe(0).time(0);
                     ps = s0.createDiscreteSensor().setName("sensor0");
-                    s0.setRoot(ps);
+                    s0.setRoot(ps,null);
                     psID = ps.uuid();
                 }
             });
@@ -84,13 +84,13 @@ public class TestKmF {
 
             final long tt=points.get(i).time;
             final double vv=points.get(i).value;
-            system.universe(0).time(tt).lookup(psID).then(new Callback<KObject>(){
+            system.universe(0).time(tt).lookup(psID,new KCallback<KObject>(){
                 public void on(KObject kObject) {
                     DiscreteSensor casted = (DiscreteSensor) kObject;
                     casted.setValue(vv);
                 }
             });
-            system.save().then(new Callback<Throwable>() {
+            system.save(new KCallback<Throwable>() {
                 public void on(Throwable throwable) {
 
                 }
@@ -99,12 +99,12 @@ public class TestKmF {
 
 
 
-        system.save().then(new Callback<Throwable>() {
+        system.save(new KCallback<Throwable>() {
             public void on(Throwable throwable) {
                 final long endtime2 = System.nanoTime();
                 double res2 = ((double) (endtime2 - starttime2)) / (1000000000);
                 System.out.println("Write: "+res2+" s");
-                system.manager().cache().clear();
+                //system.manager().cache().clear();
             }
         });
 
@@ -120,7 +120,7 @@ public class TestKmF {
             final long tt=points.get(i).time;
             final double[] value = new double[1];
 
-            system.universe(0).time(tt).lookup(psID).then(new Callback<KObject>(){
+            system.universe(0).time(tt).lookup(psID,new KCallback<KObject>(){
                 public void on(KObject kObject) {
                     DiscreteSensor casted = (DiscreteSensor) kObject;
                     value[0] = casted.getValue();

@@ -1,31 +1,30 @@
 package org.kevoree.polynomial.benchmark;
 
 
-import org.kevoree.modeling.api.Callback;
-import org.kevoree.modeling.api.KObject;
+import org.kevoree.modeling.KCallback;
+import org.kevoree.modeling.KObject;
 import org.kevoree.modeling.bench.*;
-import org.kevoree.modeling.drivers.leveldb.LevelDbContentDeliveryDriver;
 
 /**
  * Created by assaa_000 on 25/11/2014.
  */
 public class BenchmarkKmfPolynomial extends Benchmark {
     private SmartSystemModel system;
- private PolynomialSensor ps;
+     private PolynomialSensor ps;
     private long psID;
 
-    private DiskCounter dc;
+   // private DiskCounter dc;
 
 
 
     public void print(){
 
-     /*   ps.timeWalker().allTimes().then(new Callback<long[]>() {
+        ps.timeWalker().allTimes(new KCallback<long[]>(){
             public void on(long[] collected2) {
                 System.out.println("Kmf polynomial: "+collected2.length);
             }
-        });*/
-        System.out.println("size: "+dc.counter);
+        });
+      //  System.out.println("size: "+dc.counter);
 
     }
 
@@ -33,13 +32,14 @@ public class BenchmarkKmfPolynomial extends Benchmark {
     public void init() {
         try {
             system = new SmartSystemModel();
-            dc=new DiskCounter();
-           system.manager().setContentDeliveryDriver(dc);
-            system.connect().then(new Callback<Throwable>() {
+            //dc=new DiskCounter();
+            //system.manager().setContentDeliveryDriver(dc);
+           // system.manager().setContentDeliveryDriver(new Mongodb("localhost", 27017, "mydb"));
+            system.connect(new KCallback<Throwable>() {
                 public void on(Throwable throwable) {
                     SmartSystemView s0 = system.universe(0).time(0);
                     ps = s0.createPolynomialSensor().setName("sensor0");
-                    s0.setRoot(ps);
+                    s0.setRoot(ps,null);
                     psID = ps.uuid();
                 }
             });
@@ -61,9 +61,7 @@ public class BenchmarkKmfPolynomial extends Benchmark {
         final long tt=t;
         final double vv=value;
 
-
-
-        system.universe(0).time(tt).lookup(psID).then(new Callback<KObject>(){
+        system.universe(0).time(tt).lookup(psID,new KCallback<KObject>(){
             public void on(KObject kObject) {
                 PolynomialSensor casted = (PolynomialSensor) kObject;
                 casted.setValue(vv);
@@ -75,7 +73,7 @@ public class BenchmarkKmfPolynomial extends Benchmark {
 
     @Override
     public void finalput() {
-        system.save().then(new Callback<Throwable>() {
+        system.save(new KCallback<Throwable>() {
             public void on(Throwable throwable) {
 
             }
@@ -93,7 +91,7 @@ public class BenchmarkKmfPolynomial extends Benchmark {
         final long tt=t;
         final double[] value = new double[1];
 
-        system.universe(0).time(tt).lookup(psID).then(new Callback<KObject>(){
+        system.universe(0).time(tt).lookup(psID,new KCallback<KObject>(){
             public void on(KObject kObject) {
                 PolynomialSensor casted = (PolynomialSensor) kObject;
                 value[0] = casted.getValue();
