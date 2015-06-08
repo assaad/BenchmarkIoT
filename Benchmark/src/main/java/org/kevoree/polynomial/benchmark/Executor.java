@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class Executor {
     public static void main(String[] args) throws IOException {
 
-        Benchmark[] toRun = new Benchmark[2];
+        Benchmark[] toRun = new Benchmark[4];
 
         /*toRun[0] = new BenchmarkJavaHashmap();
         toRun[1] = new BenchmarkLongHashMap();*/
@@ -28,6 +28,8 @@ public class Executor {
 
         toRun[0] = new BenchmarkTreeMap();
         toRun[1] = new BenchmarkPolynomialTreeMap();
+        toRun[2] = new BenchmarkKmfDiscrete();
+        toRun[3]= new BenchmarkKmfPolynomial();
        // toRun[2] = new BenchmarkLongHashMap();
 
         long starttime;

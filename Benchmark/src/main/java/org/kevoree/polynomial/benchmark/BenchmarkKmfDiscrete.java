@@ -79,11 +79,11 @@ public class BenchmarkKmfDiscrete extends Benchmark {
             }
         });
 
-        system.save(new KCallback<Throwable>() {
+        /*system.save(new KCallback<Throwable>() {
             public void on(Throwable throwable) {
 
             }
-        });
+        });*/
 
 
     }

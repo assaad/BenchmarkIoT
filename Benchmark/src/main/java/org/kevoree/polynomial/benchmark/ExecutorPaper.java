@@ -15,7 +15,7 @@ public class ExecutorPaper {
 
     public static void execute(String dataset, String name, int times, int size, double error){
 
-        Benchmark[] toRun = new Benchmark[4];
+        Benchmark[] toRun = new Benchmark[3];
 
         //toRun[0] = new BenchmarkMongoDb();
        // toRun[1] = new BenchmarkMongoDbPolynomial();
@@ -25,9 +25,9 @@ public class ExecutorPaper {
         btm.error=error;
         toRun[1] = btm;*/
         toRun[0] = new BenchmarkTreeMap();
-        toRun[1] = new BenchmarkPolynomialTreeMap();
-        toRun[2] = new BenchmarkKmfDiscrete();
-        toRun[3] = new BenchmarkKmfPolynomial();
+       // toRun[1] = new BenchmarkPolynomialTreeMap();
+        toRun[1] = new BenchmarkKmfDiscrete();
+        toRun[2] = new BenchmarkKmfPolynomial();
 
 
        // toRun[1] = new BenchmarkKmfPolynomial();
@@ -107,8 +107,8 @@ public class ExecutorPaper {
 
         execute("ds0.zip","Constant", times,point,1); //Constant database
         execute("ds12.zip","Linear",times,point,1);
-        execute("ds1.zip","Temperature",times,point,0.1);
-        execute("ds3.zip","Luminosity",times,point,0.1);
+        /*execute("ds1.zip","Temperature",times,point,0.1);
+        execute("ds3.zip","Luminosity",times,point,0.1);*/
        /* execute("ds5.zip","Electric",times,point,1);
         execute("ds9.zip","Sound",times,point,0.0001);
         execute("ds11.zip","Random",times,point,1);*/
