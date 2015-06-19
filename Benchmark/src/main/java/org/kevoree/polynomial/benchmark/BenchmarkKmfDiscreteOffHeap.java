@@ -6,11 +6,13 @@ import org.kevoree.modeling.KObject;
 import org.kevoree.modeling.bench.DiscreteSensor;
 import org.kevoree.modeling.bench.SmartSystemModel;
 import org.kevoree.modeling.bench.SmartSystemView;
+import org.kevoree.modeling.memory.struct.OffHeapMemoryFactory;
+
 
 /**
  * Created by assaa_000 on 25/11/2014.
  */
-public class BenchmarkKmfDiscrete extends Benchmark {
+public class BenchmarkKmfDiscreteOffHeap extends Benchmark {
     private SmartSystemModel system;
     private DiscreteSensor ps;
     private long psID;
@@ -33,6 +35,8 @@ public class BenchmarkKmfDiscrete extends Benchmark {
         try {
 
             system = new SmartSystemModel();
+         //   system.manager().setFactory(new HeapMemoryFactory());
+            system.manager().setFactory(new OffHeapMemoryFactory());
 
 
          //   system.manager().setContentDeliveryDriver(new LevelDbContentDeliveryDriver("/Users/assaad/work/github/BenchmarkIoT/testid/"));
@@ -44,7 +48,7 @@ public class BenchmarkKmfDiscrete extends Benchmark {
                     //System.out.println("inside");
                     SmartSystemView s0 = system.universe(0).time(0);
                     ps = s0.createDiscreteSensor().setName("sensor0");
-                    s0.setRoot(ps,null);
+                    s0.setRoot(ps, null);
                     psID = ps.uuid();
                     system.save(new KCallback<Throwable>() {
                         public void on(Throwable throwable) {
@@ -64,7 +68,7 @@ public class BenchmarkKmfDiscrete extends Benchmark {
 
     @Override
     public String getBenchmarkName() {
-        return "KMF Discrete";
+        return "KMF Discrete offheap";
     }
 
     @Override
@@ -72,7 +76,7 @@ public class BenchmarkKmfDiscrete extends Benchmark {
 
         final long tt=t;
         final double vv=value;
-        system.universe(0).time(tt).lookup(psID,new KCallback<KObject>(){
+        system.lookup(0, tt, psID, new KCallback<KObject>() {
             public void on(KObject kObject) {
                 DiscreteSensor casted = (DiscreteSensor) kObject;
                 casted.setValue(vv);

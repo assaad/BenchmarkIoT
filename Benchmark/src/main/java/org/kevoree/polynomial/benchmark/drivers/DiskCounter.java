@@ -7,6 +7,7 @@ import org.kevoree.modeling.KObject;
 import org.kevoree.modeling.KUniverse;
 import org.kevoree.modeling.cdn.KContentDeliveryDriver;
 import org.kevoree.modeling.cdn.KContentPutRequest;
+import org.kevoree.modeling.cdn.KMessageInterceptor;
 import org.kevoree.modeling.cdn.impl.MemoryContentDeliveryDriver;
 import org.kevoree.modeling.event.KEventListener;
 import org.kevoree.modeling.event.KEventMultiListener;
@@ -64,6 +65,16 @@ public class DiskCounter implements KContentDeliveryDriver {
 
     public void send(KMessage msgs) {
         mem.send(msgs);
+    }
+
+    public int addMessageInterceptor(KMessageInterceptor interceptor) {
+        return mem.addMessageInterceptor(interceptor);
+
+    }
+
+    public void removeMessageInterceptor(int id) {
+        mem.removeMessageInterceptor(id);
+
     }
 
     public void setManager(KMemoryManager manager) {

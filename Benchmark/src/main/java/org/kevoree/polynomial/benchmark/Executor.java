@@ -28,7 +28,7 @@ public class Executor {
 
         toRun[0] = new BenchmarkTreeMap();
         toRun[1] = new BenchmarkPolynomialTreeMap();
-        toRun[2] = new BenchmarkKmfDiscrete();
+        toRun[2] = new BenchmarkKmfDiscreteHeap();
         toRun[3]= new BenchmarkKmfPolynomial();
        // toRun[2] = new BenchmarkLongHashMap();
 

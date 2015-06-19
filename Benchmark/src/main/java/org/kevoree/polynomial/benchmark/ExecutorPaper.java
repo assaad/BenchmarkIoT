@@ -5,7 +5,6 @@ import org.kevoree.util.DataPoint;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 /**
@@ -26,8 +25,9 @@ public class ExecutorPaper {
         toRun[1] = btm;*/
         toRun[0] = new BenchmarkTreeMap();
        // toRun[1] = new BenchmarkPolynomialTreeMap();
-        toRun[1] = new BenchmarkKmfDiscrete();
-        toRun[2] = new BenchmarkKmfPolynomial();
+        toRun[1] = new BenchmarkKmfDiscreteHeap();
+        toRun[2] = new BenchmarkKmfDiscreteOffHeap();
+       // toRun[2] = new BenchmarkKmfPolynomial();
 
 
        // toRun[1] = new BenchmarkKmfPolynomial();
@@ -102,7 +102,7 @@ public class ExecutorPaper {
 
     public static void main(String[] args) throws IOException {
         int times=2;
-        int point=5000000;
+        int point=1000;
 
 
         execute("ds0.zip","Constant", times,point,1); //Constant database
