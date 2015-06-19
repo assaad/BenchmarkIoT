@@ -14,7 +14,7 @@ public class ExecutorPaper {
 
     public static void execute(String dataset, String name, int times, int size, double error){
 
-        Benchmark[] toRun = new Benchmark[3];
+        Benchmark[] toRun = new Benchmark[2];
 
         //toRun[0] = new BenchmarkMongoDb();
        // toRun[1] = new BenchmarkMongoDbPolynomial();
@@ -26,7 +26,7 @@ public class ExecutorPaper {
         toRun[0] = new BenchmarkTreeMap();
        // toRun[1] = new BenchmarkPolynomialTreeMap();
         toRun[1] = new BenchmarkKmfDiscreteHeap();
-        toRun[2] = new BenchmarkKmfDiscreteOffHeap();
+      //  toRun[2] = new BenchmarkKmfDiscreteOffHeap();
        // toRun[2] = new BenchmarkKmfPolynomial();
 
 
@@ -46,7 +46,7 @@ public class ExecutorPaper {
         endtime = System.nanoTime();
         res = ((double) (endtime - starttime)) / (1000000000);
         System.out.println();
-        System.out.println("Loaded " + name + " :" + p.size() + " values in " + res + " s!");
+        System.out.println("Loaded " + name + " :" + size + " values in " + res + " s!");
 
 
         Collections.sort(p);
@@ -102,7 +102,7 @@ public class ExecutorPaper {
 
     public static void main(String[] args) throws IOException {
         int times=2;
-        int point=1000;
+        int point=30000;
 
 
         execute("ds0.zip","Constant", times,point,1); //Constant database
