@@ -61,7 +61,7 @@ public class BenchmarkKmfPolynomial extends Benchmark {
         final long tt=t;
         final double vv=value;
 
-        system.universe(0).time(tt).lookup(psID,new KCallback<KObject>(){
+        ps.jump(tt,new KCallback<KObject>(){
             public void on(KObject kObject) {
                 PolynomialSensor casted = (PolynomialSensor) kObject;
                 casted.setValue(vv);

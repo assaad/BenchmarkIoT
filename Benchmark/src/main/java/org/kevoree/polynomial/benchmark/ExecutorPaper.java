@@ -14,7 +14,7 @@ public class ExecutorPaper {
 
     public static void execute(String dataset, String name, int times, int size, double error){
 
-        Benchmark[] toRun = new Benchmark[2];
+        Benchmark[] toRun = new Benchmark[4];
 
         //toRun[0] = new BenchmarkMongoDb();
        // toRun[1] = new BenchmarkMongoDbPolynomial();
@@ -24,10 +24,10 @@ public class ExecutorPaper {
         btm.error=error;
         toRun[1] = btm;*/
         toRun[0] = new BenchmarkTreeMap();
-       // toRun[1] = new BenchmarkPolynomialTreeMap();
-        toRun[1] = new BenchmarkKmfDiscreteHeap();
+        toRun[1] = new BenchmarkPolynomialTreeMap();
+        toRun[2] = new BenchmarkKmfDiscreteHeap();
       //  toRun[2] = new BenchmarkKmfDiscreteOffHeap();
-       // toRun[2] = new BenchmarkKmfPolynomial();
+        toRun[3] = new BenchmarkKmfPolynomial();
 
 
        // toRun[1] = new BenchmarkKmfPolynomial();
@@ -70,7 +70,7 @@ public class ExecutorPaper {
             toRun[i].setGcCollect(true);
             toRun[i].setDataPoints(points);
             System.out.println("Writing on " + toRun[i].getBenchmarkName() + ": " + toRun[i].benchmarkWrite(times)+" s");
-          toRun[i].print();
+        //  toRun[i].print();
         }
 
 
@@ -102,7 +102,7 @@ public class ExecutorPaper {
 
     public static void main(String[] args) throws IOException {
         int times=2;
-        int point=30000;
+        int point=1000000;
 
 
         execute("ds0.zip","Constant", times,point,1); //Constant database

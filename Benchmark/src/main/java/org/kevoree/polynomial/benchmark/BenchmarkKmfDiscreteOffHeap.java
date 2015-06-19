@@ -76,7 +76,8 @@ public class BenchmarkKmfDiscreteOffHeap extends Benchmark {
 
         final long tt=t;
         final double vv=value;
-        system.lookup(0, tt, psID, new KCallback<KObject>() {
+
+        ps.jump(tt,new KCallback<KObject>(){
             public void on(KObject kObject) {
                 DiscreteSensor casted = (DiscreteSensor) kObject;
                 casted.setValue(vv);

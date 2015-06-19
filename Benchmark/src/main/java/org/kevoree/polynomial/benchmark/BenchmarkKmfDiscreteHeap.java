@@ -71,12 +71,14 @@ public class BenchmarkKmfDiscreteHeap extends Benchmark {
         return "KMF Discrete heap";
     }
 
+
     @Override
     public void put(long t, double value) {
 
         final long tt=t;
         final double vv=value;
-        system.lookup(0,tt,psID,new KCallback<KObject>(){
+
+        ps.jump(tt,new KCallback<KObject>(){
             public void on(KObject kObject) {
                 DiscreteSensor casted = (DiscreteSensor) kObject;
                 casted.setValue(vv);
