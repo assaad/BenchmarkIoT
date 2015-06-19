@@ -8944,7 +8944,7 @@ var org;
                         };
                         MetaPolynomialSensor.INSTANCE = null;
                         MetaPolynomialSensor.ATT_NAME = new org.kevoree.modeling.meta.impl.MetaAttribute("name", 0, 0, false, org.kevoree.modeling.meta.KPrimitiveTypes.STRING, org.kevoree.modeling.extrapolation.impl.DiscreteExtrapolation.instance());
-                        MetaPolynomialSensor.ATT_VALUE = new org.kevoree.modeling.meta.impl.MetaAttribute("value", 1, 0, false, org.kevoree.modeling.meta.KPrimitiveTypes.DOUBLE, org.kevoree.modeling.extrapolation.impl.DiscreteExtrapolation.instance());
+                        MetaPolynomialSensor.ATT_VALUE = new org.kevoree.modeling.meta.impl.MetaAttribute("value", 1, 0.01, false, org.kevoree.modeling.meta.KPrimitiveTypes.CONTINUOUS, org.kevoree.modeling.extrapolation.impl.PolynomialExtrapolation.instance());
                         MetaPolynomialSensor.REF_OP_SENSORS = new org.kevoree.modeling.meta.impl.MetaReference("op_sensors", 2, false, false, function () {
                             return org.kevoree.modeling.bench.meta.MetaRoom.getInstance();
                         }, "sensors", function () {

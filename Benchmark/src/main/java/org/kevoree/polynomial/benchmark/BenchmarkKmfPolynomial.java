@@ -73,11 +73,11 @@ public class BenchmarkKmfPolynomial extends Benchmark {
 
     @Override
     public void finalput() {
-        system.save(new KCallback<Throwable>() {
+     /*   system.save(new KCallback<Throwable>() {
             public void on(Throwable throwable) {
 
             }
-        });
+        });*/
 
     }
     @Override
@@ -91,7 +91,7 @@ public class BenchmarkKmfPolynomial extends Benchmark {
         final long tt=t;
         final double[] value = new double[1];
 
-        system.universe(0).time(tt).lookup(psID,new KCallback<KObject>(){
+        ps.jump(tt, new KCallback<KObject>(){
             public void on(KObject kObject) {
                 PolynomialSensor casted = (PolynomialSensor) kObject;
                 value[0] = casted.getValue();

@@ -114,7 +114,7 @@ public class BenchmarkKmfDiscreteOffHeap extends Benchmark {
         final long tt=t;
         final double[] value = new double[1];
 
-        system.universe(0).time(tt).lookup(psID,new KCallback<KObject>(){
+        ps.jump(tt, new KCallback<KObject>() {
             public void on(KObject kObject) {
                 DiscreteSensor casted = (DiscreteSensor) kObject;
                 value[0] = casted.getValue();
